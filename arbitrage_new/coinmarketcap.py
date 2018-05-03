@@ -1,23 +1,24 @@
 import json
 import requests
+import ccxt
 
-#BaseTickerURLs
-gateio="http://data.gate.io/api2/1/pairs"
-bitstamp="https://www.bitstamp.net/api/v2/trading-pairs-info/"
-binance="https://api.binance.com/api/v1/ticker/24hr"
-liqui="https://api.liqui.io/api/3/info"
-cryptopia="https://www.cryptopia.co.nz/api/GetCurrencies"
-yobit="https://yobit.net/api/3/info"
-coinExchange="https://www.coinexchange.io/api/v1/getmarkets"
-hitBTC="https://api.hitbtc.com/api/2/public/currency"
-gdax="https://api-public.sandbox.gdax.com/products"
-gemini="https://api.gemini.com/v1/symbols"
 
 master_list=[] #this will contain all the currency pairs
 index_list=[]
 #---------------------WE NOW HAVE PAIR URLs------------------------------------#
 #----------Now we will start to form lists of our pairs------------------------#
 #and("btc")and("eur")and("pln") and("pln") and ("cny")and ("jpy")
+print(ccxt.exchanges)
+
+
+class CurrencyPair:
+
+	def __init__(self,name, exchange, bid, ask):
+		self.name=name
+		self.exchange=exchange
+		self.bid=bid
+		self.ask=ask
+
 
 
 #GATEIO PAIRS
@@ -32,12 +33,12 @@ gate_pairs_normalized=[]
 
 for x in data:
 	if("usdt" not in str(x)):
-		gate_pairs.append(str(x))
+		gate_pairs.append(CurrencyPair(str(x)))
 
 for i in range(len(gate_pairs)):
-	gate_pairs_normalized.append(gate_pairs[i].replace("_",""))
+	gate_pairs_normalized.append(gate_pairs[i].name.replace("_",""))
 
-master_list.append(gate_pairs_normalized)
+#master_list.append(gate_pairs_normalized)
 #Gate pairs now contains any pairs we care about
 
 #Bitstamp
@@ -98,3 +99,4 @@ for i in range(len(master_list)):
 						print("Match!")
 
 
+'''
