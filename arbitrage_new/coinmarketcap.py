@@ -19,7 +19,7 @@ class CurrencyPair:
 		self.bid=bid
 		self.ask=ask
 
-
+#com
 
 #GATEIO PAIRS
 exchanges= ccxt.exchanges
