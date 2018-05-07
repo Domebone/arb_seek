@@ -23,20 +23,7 @@ class CurrencyPair:
 
 #GATEIO PAIRS
 
-request=requests.get(gateio)
-data=request.json()
-
-print("Loading GateIO Pairs...")
-
-gate_pairs=[]
-gate_pairs_normalized=[]
-
-for x in data:
-	if("usdt" not in str(x)):
-		gate_pairs.append(CurrencyPair(str(x)))
-
-for i in range(len(gate_pairs)):
-	gate_pairs_normalized.append(gate_pairs[i].name.replace("_",""))
+print(exchange.)
 
 #master_list.append(gate_pairs_normalized)
 #Gate pairs now contains any pairs we care about
