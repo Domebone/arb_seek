@@ -1,6 +1,6 @@
 import json
 import requests
-import ccxt
+import ccxt.async as ccxt
 
 
 master_list=[] #this will contain all the currency pairs
