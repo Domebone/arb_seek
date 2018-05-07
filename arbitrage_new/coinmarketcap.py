@@ -1,6 +1,11 @@
 import json
 import requests
+<<<<<<< HEAD
 import ccxt
+=======
+import asyncio
+import ccxt.async as ccxt
+>>>>>>> origin/master
 
 
 master_list=[] #this will contain all the currency pairs
@@ -19,11 +24,9 @@ class CurrencyPair:
 		self.bid=bid
 		self.ask=ask
 
-#com
 
-#GATEIO PAIRS
-
-exchanges = {}  # a placeholder for your instances
+# a placeholder for your instances
+exchanges = {}
 
 #looping through the exchanges to make dict of key and objext pair
 for id in ccxt.exchanges:
@@ -40,39 +43,19 @@ print(exchanges)
 for key in exchanges:
 	print ( key, exchanges[key].load_markets())
 
+'''
+async def getticker():
+    exchange = ccxt.okex({'proxy': 'https://cors-anywhere.herokuapp.com/'})  # ←------- added proxy here
+    ticker = await exchange.fetch_ticker('BTC/USDT')
+    await exchange.close()
+    print(ticker)
+
+asyncio.get_event_loop().run_until_complete(getticker())
+>>>>>>> origin/master
 
 '''''
-#Bitstamp
 
-request=requests.get(bitstamp)
-data=request.json()
-
-print("Loading Bitstamp Pairs...")
-
-bitstamp_pairs=[]
-
-for x in data:
-	if("eur" not in str(x)):
-		bitstamp_pairs.append(str(x["url_symbol"]))
-master_list.append(bitstamp_pairs)
-
-#Binance
-
-request=requests.get(binance)
-data=request.json()
-
-print("Loading Binance Pairs...")
-
-binance_pairs=[]
-
-for x in data:
-	binance_pairs.append(str(x["symbol"]))
-
-master_list.append(binance_pairs)
-
-
-
-
+'''
 #--------------------------COMPARISON---------------------------------#
 print("Master List: ")
 for i in range(len(master_list)):
