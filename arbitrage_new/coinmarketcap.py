@@ -1,6 +1,6 @@
 import json
 import requests
-import ccxt.async as ccxt
+import ccxt
 
 
 master_list=[] #this will contain all the currency pairs
@@ -22,15 +22,24 @@ class CurrencyPair:
 #com
 
 #GATEIO PAIRS
-exchanges= ccxt.exchanges
 
-for x in exchanges:
-	print (x)
+exchanges = {}  # a placeholder for your instances
 
-#print (exchanges)
+#looping through the exchanges to make dict of key and objext pair
+for id in ccxt.exchanges:
+	exchange = getattr(ccxt, id)
+	exchanges[id] = exchange()
 
-#master_list.append(gate_pairs_normalized)
-#Gate pairs now contains any pairs we care about
+
+#some of the exchanges require API calls, delete those
+error_List= ['_1broker', 'allcoin', 'bibox', 'braziliex', 'coinegg', 'coolcoin', 'exx', 'huobicny','ice3x', 'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc','yunbi']
+for e in error_List:
+	del exchanges[e]
+
+print(exchanges)
+for key in exchanges:
+	print ( key, exchanges[key].load_markets())
+
 
 '''''
 #Bitstamp
