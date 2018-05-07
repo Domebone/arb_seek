@@ -8,7 +8,7 @@ master_list=[] #this will contain all the currency pairs
 
 #----------Now we will start to form lists of our pairs------------------------#
 
-print(ccxt.exchanges)
+#print(ccxt.exchanges)
 
 
 class CurrencyPair:
@@ -22,8 +22,12 @@ class CurrencyPair:
 
 
 #GATEIO PAIRS
+exchanges= ccxt.exchanges
 
-print(exchange.)
+for x in exchanges:
+	print (x)
+
+#print (exchanges)
 
 #master_list.append(gate_pairs_normalized)
 #Gate pairs now contains any pairs we care about
