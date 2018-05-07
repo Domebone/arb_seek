@@ -5,7 +5,7 @@ import ccxt
 
 master_list=[] #this will contain all the currency pairs
 
-#---------------------WE NOW HAVE PAIR URLs------------------------------------#
+
 #----------Now we will start to form lists of our pairs------------------------#
 #and("btc")and("eur")and("pln") and("pln") and ("cny")and ("jpy")
 print(ccxt.exchanges)
