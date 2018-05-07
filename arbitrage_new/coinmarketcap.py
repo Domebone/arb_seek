@@ -20,7 +20,7 @@ class CurrencyPair:
 
 # a placeholder for your instances
 exchanges = {}
-markets=[]
+symbols=[]
 
 #looping through the exchanges to make dict of key and objext pair
 for id in ccxt.exchanges:
@@ -35,8 +35,11 @@ for e in error_List:
 
 print(exchanges)
 for key in exchanges:
-	markets.append(exchanges[key].load_markets())
+	#print(key)
+	markets=exchanges[key].load_markets()
+	symbols.append(exchanges[key].symbols)
 
+	print(key,symbols)
 
 
 
