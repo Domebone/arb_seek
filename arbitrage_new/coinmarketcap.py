@@ -30,7 +30,7 @@ for id in ccxt.exchanges:
 	exchange = getattr(ccxt, id)
 	exchanges[id] = exchange()
 
-
+#try 2
 #some of the exchanges require API calls, delete those
 error_List= ['_1broker', 'allcoin', 'bibox', 'braziliex', 'coinegg', 'coolcoin', 'exx', 'huobicny','ice3x', 'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc','yunbi']
 for e in error_List:
