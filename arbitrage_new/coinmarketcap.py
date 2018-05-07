@@ -1,5 +1,6 @@
 import json
 import requests
+import asyncio
 import ccxt.async as ccxt
 
 
@@ -19,50 +20,17 @@ class CurrencyPair:
 		self.bid=bid
 		self.ask=ask
 
-#com
 
 #GATEIO PAIRS
-exchanges= ccxt.exchanges
+async def getticker():
+    exchange = ccxt.okex({'proxy': 'https://cors-anywhere.herokuapp.com/'})  # ←------- added proxy here
+    ticker = await exchange.fetch_ticker('BTC/USDT')
+    await exchange.close()
+    print(ticker)
 
-for x in exchanges:
-	print (x)
-
-#print (exchanges)
-
-#master_list.append(gate_pairs_normalized)
-#Gate pairs now contains any pairs we care about
+asyncio.get_event_loop().run_until_complete(getticker())
 
 '''''
-#Bitstamp
-
-request=requests.get(bitstamp)
-data=request.json()
-
-print("Loading Bitstamp Pairs...")
-
-bitstamp_pairs=[]
-
-for x in data:
-	if("eur" not in str(x)):
-		bitstamp_pairs.append(str(x["url_symbol"]))
-master_list.append(bitstamp_pairs)
-
-#Binance
-
-request=requests.get(binance)
-data=request.json()
-
-print("Loading Binance Pairs...")
-
-binance_pairs=[]
-
-for x in data:
-	binance_pairs.append(str(x["symbol"]))
-
-master_list.append(binance_pairs)
-
-
-
 
 #--------------------------COMPARISON---------------------------------#
 print("Master List: ")
