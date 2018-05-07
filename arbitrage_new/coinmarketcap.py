@@ -4,7 +4,7 @@ import ccxt
 
 
 master_list=[] #this will contain all the currency pairs
-index_list=[]
+
 #---------------------WE NOW HAVE PAIR URLs------------------------------------#
 #----------Now we will start to form lists of our pairs------------------------#
 #and("btc")and("eur")and("pln") and("pln") and ("cny")and ("jpy")
@@ -41,6 +41,7 @@ for i in range(len(gate_pairs)):
 #master_list.append(gate_pairs_normalized)
 #Gate pairs now contains any pairs we care about
 
+'''''
 #Bitstamp
 
 request=requests.get(bitstamp)
