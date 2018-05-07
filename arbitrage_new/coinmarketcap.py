@@ -2,15 +2,11 @@ import json
 import requests
 import ccxt
 import asyncio
-import ccxt
 
 
-master_list=[] #this will contain all the currency pairs
 
 
 #----------Now we will start to form lists of our pairs------------------------#
-
-#print(ccxt.exchanges)
 
 
 class CurrencyPair:
@@ -24,6 +20,7 @@ class CurrencyPair:
 
 # a placeholder for your instances
 exchanges = {}
+markets=[]
 
 #looping through the exchanges to make dict of key and objext pair
 for id in ccxt.exchanges:
@@ -38,19 +35,13 @@ for e in error_List:
 
 print(exchanges)
 for key in exchanges:
-	print ( key, exchanges[key].load_markets())
+	markets.append(exchanges[key].load_markets())
 
-'''
-async def getticker():
-    exchange = ccxt.okex({'proxy': 'https://cors-anywhere.herokuapp.com/'})  # ←------- added proxy here
-    ticker = await exchange.fetch_ticker('BTC/USDT')
-    await exchange.close()
-    print(ticker)
 
-asyncio.get_event_loop().run_until_complete(getticker())
->>>>>>> origin/master
 
-'''''
+
+
+
 
 '''
 #--------------------------COMPARISON---------------------------------#
