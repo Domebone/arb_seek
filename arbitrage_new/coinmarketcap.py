@@ -1,51 +1,70 @@
 import json
 import requests
-import ccxt
+import ccxt.async as ccxt
 import asyncio
+import time
 
 
-
-
-#----------Now we will start to form lists of our pairs------------------------#
+# ----------Now we will start to form lists of our pairs------------------------#
 
 
 class CurrencyPair:
 
-	def __init__(self,name, exchange, bid, ask):
-		self.name=name
-		self.exchange=exchange
-		self.bid=bid
-		self.ask=ask
+	def __init__(self, name, exchange, bid, ask):
+		self.name = name
+		self.exchange = exchange
+		self.bid = bid
+		self.ask = ask
+
 
 
 # a placeholder for your instances
 exchanges = {}
-symbols=[]
+symbols = []
 
-#looping through the exchanges to make dict of key and objext pair
-for id in ccxt.exchanges:
-	exchange = getattr(ccxt, id)
-	exchanges[id] = exchange()
+async def getExchanges(exch):
+	# looping through the exchanges to make dict of key and object pair
+	for id in ccxt.exchanges:
+		exchange = getattr(ccxt, id)
+		asyncio.sleep(.000001)
+		exch[id] = exchange()
+		await exch[id].close()
 
-#try 2
-#some of the exchanges require API calls, delete those
-error_List= ['_1broker', 'allcoin', 'bibox', 'braziliex', 'coinegg', 'coolcoin', 'exx', 'huobicny','ice3x', 'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc','yunbi']
+	return exch
+
+loop = asyncio.get_event_loop()
+
+loop.run_until_complete(getExchanges(exchanges))
+loop.close()
+
+
+
+
+
+print ("oifoje")
+# try 2
+# some of the exchanges require API calls, delete those
+error_List = ['_1broker', 'allcoin', 'bibox', 'braziliex', 'coinegg', 'coolcoin', 'exx', 'huobicny', 'ice3x',
+			  'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi']
 for e in error_List:
-	del exchanges[e]
+	if e in exchanges:
+		del exchanges[e]
 
 print(exchanges)
-for key in exchanges:
-	#print(key)
-	markets=exchanges[key].load_markets()
-	symbols.append(exchanges[key].symbols)
 
-	print(key,symbols)
-
-
-
-
-
-
+'''
+async def getMarkets(exch):
+	for key in exch:
+		# print(key)
+		markets =exch[key].load_markets()
+		asyncio.sleep(.001)
+		key.close()
+		markets.close()
+		symbols.append(exch[key].symbols)
+		return 1
+'''
+loop.close()
+# print(key,symbols)
 '''
 #--------------------------COMPARISON---------------------------------#
 print("Master List: ")
