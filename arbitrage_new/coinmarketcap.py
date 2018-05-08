@@ -19,51 +19,53 @@ class CurrencyPair:									# Each unique Currency PAIR from each unique exchang
 
 # Our instance of our different exchanges will be held in a dict, indexed by exchange id.
 exchanges = {}
-tickers = {}
-symbols =[]
-
+symbols = []
+rejectList= []
 def getExchanges(exch):
     # looping through the exchanges to make dict of key and object pair
     error_List = ['_1broker', 'allcoin', 'bibox', 'braziliex', 'coinegg', 'coolcoin', 'exx', 'huobicny', 'ice3x',
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"cryptopia"]
+
+    #reading all exchanges
     for id in ccxt.exchanges:
-        if id not in error_List:
+        #ignoring all the ones we don't care about
+        if id not in error_List and (id not in rejectList):
+            #getting the id attribute for each
             exchange = getattr(ccxt, id)
+            #building our dictionary of id and object pairs
             exch[id] = exchange()
-
-
     return exch
 
+#change the global variable
 exchanges= getExchanges(exchanges)
 
-#loop = asyncio.get_event_loop()
-#loop.close()
-
-# try 2
 # some of the exchanges require API calls, delete those
 
 
 async def loadInfo(exch):
+    #loop though everyonbe of our exchanges
     for key in exch:
         print("Loading info from-> " +key+"\n...")
+        #loading all the markets
         markets = await exch[key].load_markets()
+        print(markets)
 
-
+        #keeping the symbols and keys we have
         symbols.append(exch[key].symbols)
-        #ticker =
+        #close our keys
         await exch[key].close()
 
 
 
 
 print(exchanges)
-
+#set up asyncio
 loop= asyncio.get_event_loop()
 
 
 loop.run_until_complete(loadInfo(exchanges))
 
-print(tickers)
+print(symbols)
 
 loop.close()
 
