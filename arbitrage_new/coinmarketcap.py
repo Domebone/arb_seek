@@ -5,10 +5,9 @@ import asyncio
 import time
 
 
-# ----------Now we will start to form lists of our pairs------------------------#
+startTime=time.time()
 
-
-class CurrencyPair:
+class CurrencyPair:									# Each unique Currency PAIR from each unique exchange will become an object
 
     def __init__(self, name, exchange, bid, ask):
         self.name = name
@@ -18,19 +17,19 @@ class CurrencyPair:
 
 
 
-# a placeholder for your instances
+# Our instance of our different exchanges will be held in a dict, indexed by exchange ids.
 exchanges = {}
 symbols = []
 
 def getExchanges(exch):
     # looping through the exchanges to make dict of key and object pair
     error_List = ['_1broker', 'allcoin', 'bibox', 'braziliex', 'coinegg', 'coolcoin', 'exx', 'huobicny', 'ice3x',
-                  'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi']
+                  'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"cryptopia"]
     for id in ccxt.exchanges:
         if id not in error_List:
             exchange = getattr(ccxt, id)
             exch[id] = exchange()
-            exch[id].close()
+
 
     '''for e in error_List:
         if e in exch:
@@ -46,18 +45,15 @@ exchanges= getExchanges(exchanges)
 # some of the exchanges require API calls, delete those
 
 
-async def getMarkets(exch):
+async def loadInfo(exch):
     for key in exch:
-        print(key)
+        print("Loading info from-> " +key+"\n...")
         markets = await exch[key].load_markets()
 
-        asyncio.sleep(.0000001)
-        print(exch[key].symbols)
+
         symbols.append(exch[key].symbols)
         await exch[key].close()
 
-
-#loop.run_until_complete(getExchanges(exchanges))
 
 
 
@@ -66,14 +62,15 @@ print(exchanges)
 loop= asyncio.get_event_loop()
 
 
-loop.run_until_complete(getMarkets(exchanges))
+loop.run_until_complete(loadInfo(exchanges))
 
 print(symbols)
 
 loop.close()
 
 
-
+runTime=time.time()-startTime
+print(runTime)
 
 '''
 #--------------------------COMPARISON---------------------------------#
