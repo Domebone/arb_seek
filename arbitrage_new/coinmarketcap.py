@@ -19,7 +19,8 @@ class CurrencyPair:									# Each unique Currency PAIR from each unique exchang
 
 # Our instance of our different exchanges will be held in a dict, indexed by exchange ids.
 exchanges = {}
-symbols = []
+tickers = {}
+symbols =[]
 
 def getExchanges(exch):
     # looping through the exchanges to make dict of key and object pair
@@ -31,9 +32,6 @@ def getExchanges(exch):
             exch[id] = exchange()
 
 
-    '''for e in error_List:
-        if e in exch:
-            del exch[e]'''
     return exch
 
 exchanges= getExchanges(exchanges)
@@ -52,6 +50,7 @@ async def loadInfo(exch):
 
 
         symbols.append(exch[key].symbols)
+        #ticker =
         await exch[key].close()
 
 
@@ -64,7 +63,7 @@ loop= asyncio.get_event_loop()
 
 loop.run_until_complete(loadInfo(exchanges))
 
-print(symbols)
+print(tickers)
 
 loop.close()
 
