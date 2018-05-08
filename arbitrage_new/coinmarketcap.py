@@ -17,7 +17,7 @@ class CurrencyPair:									# Each unique Currency PAIR from each unique exchang
 
 
 
-# Our instance of our different exchanges will be held in a dict, indexed by exchange ids.
+# Our instance of our different exchanges will be held in a dict, indexed by exchange id.
 exchanges = {}
 tickers = {}
 symbols =[]
