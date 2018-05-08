@@ -50,8 +50,14 @@ async def loadInfo(exch):
         markets = await exch[key].load_markets()
         print(markets)
 
-        #keeping the symbols and keys we have
-        symbols.append(exch[key].symbols)
+        #keeping the coins we have
+        coins= exch[key].symbols
+        symbols.append(coins)
+
+        for x in coins:
+            t= await exch[key].fetch_ticker(x)
+            print(t)
+
         #close our keys
         await exch[key].close()
 
