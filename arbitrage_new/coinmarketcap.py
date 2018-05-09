@@ -28,7 +28,7 @@ def getExchanges(exch):
                   ,"bitthumb"]
     inc_List=["binance","bitlish","bitstamp","bittrex","bl3p","btcmarkets","btcx","ccex",
               "cex","coinexchange","coinfloor","coingi","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
-              "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","yobit","therock","wex","mixcoins","bitz",
+              "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
               "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
 
     #reading all exchanges
@@ -65,7 +65,6 @@ async def loadInfo(exch):
                 print(t)
         except Exception:
             for x in coins:
-                if exch[key] is "gdax": asyncio.sleep(1)
                 t= await exch[key].fetch_ticker(x)
                 print(t)
 
