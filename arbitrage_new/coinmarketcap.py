@@ -21,7 +21,6 @@ class CurrencyPair:									# Each unique Currency PAIR from each unique exchang
 exchanges = {}
 symbols = []
 rejectList= []
-curr_bids= {}
 objectList= []
 def getExchanges(exch):
     # looping through the exchanges to make dict of key and object pair
@@ -69,10 +68,10 @@ async def loadInfo(exch):
                     stuff={}
                     if c in t:
                         stuff = t[c]
-                    if 'maxbid' in stuff:
-                        objectList.append(CurrencyPair(stuff['symbol'], key, stuff['maxbid'], stuff['maxask']))
-                    else:
-                        objectList.append(CurrencyPair(stuff['symbol'], key, stuff['bid'], stuff['ask']))
+                        if 'maxbid' in stuff:
+                            objectList.append(CurrencyPair(stuff['symbol'], key, stuff['maxbid'], stuff['maxask']))
+                        else:
+                            objectList.append(CurrencyPair(stuff['symbol'], key, stuff['bid'], stuff['ask']))
 
 
         except Exception:
@@ -105,7 +104,7 @@ print(symbols)
 loop.close()
 
 for stuff in objectList:
-    print(stuff.echange, stuff.name, stuff.bid, stuff.ask)
+    print(stuff.exchange, stuff.name, stuff.bid, stuff.ask)
 
 runTime=time.time()-startTime
 print(runTime)
