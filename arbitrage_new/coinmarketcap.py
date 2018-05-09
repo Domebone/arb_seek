@@ -23,13 +23,18 @@ symbols = []
 rejectList= []
 def getExchanges(exch):
     # looping through the exchanges to make dict of key and object pair
-    error_List = ['_1broker', 'allcoin', 'bibox', 'braziliex', 'coinegg', 'coolcoin', 'exx', 'huobicny', 'ice3x',
-                  'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"cryptopia"]
+    rejectList = ['_1broker', 'allcoin', 'bibox', 'braziliex','btcx', 'coinegg',"coinmarketcap", 'coolcoin', 'exx', 'huobicny', 'ice3x',
+                  'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
+                  ,"bitthumb"]
+    inc_List=["bitfinex","bitfinex2","binance","bitlish","bitstamp","bitstamp1","bittrex","bl3p","btcmarkets","btcx","ccex",
+              "cex","coinexchange","coinfloor","coingi","coinmate","dsx","ethfinex","gdax","gemini","hitbtc","hitbtc2",
+              "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","yobit","therock","wex","mixcoins","bitz",
+              "cobinhood","gateio","gatecoin","hadax","huobi","lakebtc",""]
 
     #reading all exchanges
     for id in ccxt.exchanges:
         #ignoring all the ones we don't care about
-        if id not in error_List and (id not in rejectList):
+        if id in inc_List and (id not in rejectList):
             #getting the id attribute for each
             exchange = getattr(ccxt, id)
             #building our dictionary of id and object pairs
@@ -54,11 +59,11 @@ async def loadInfo(exch):
         coins= exch[key].symbols
         symbols.append(coins)
 
-        for x in coins:
-            t= await exch[key].fetch_ticker(x)
-            print(t)
+        #for x in coins:
+         #   t= await exch[key].fetch_ticker(x)
+          #  print(t)
 
-        #close our keys
+        #close our instances
         await exch[key].close()
 
 
