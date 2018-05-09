@@ -23,13 +23,13 @@ symbols = []
 rejectList= []
 def getExchanges(exch):
     # looping through the exchanges to make dict of key and object pair
-    rejectList = ['_1broker', 'allcoin', 'bibox', 'braziliex','btcx', 'coinegg',"coinmarketcap", 'coolcoin', 'exx', 'huobicny', 'ice3x',
+    rejectList = ['_1broker', 'allcoin', 'bibox', 'braziliex','btcx', 'coinegg',"coinmarketcap", 'coolcoin','huobicny', 'exx', 'ice3x',
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
-    inc_List=["bitfinex","bitfinex2","binance","bitlish","bitstamp","bitstamp1","bittrex","bl3p","btcmarkets","btcx","ccex",
-              "cex","coinexchange","coinfloor","coingi","coinmate","dsx","ethfinex","gdax","gemini","hitbtc","hitbtc2",
+    inc_List=["binance","bitlish","bitstamp","bittrex","bl3p","btcmarkets","btcx","ccex",
+              "cex","coinexchange","coinfloor","coingi","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
               "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","yobit","therock","wex","mixcoins","bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobi","lakebtc",""]
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -59,9 +59,15 @@ async def loadInfo(exch):
         coins= exch[key].symbols
         symbols.append(coins)
 
-        #for x in coins:
-         #   t= await exch[key].fetch_ticker(x)
-          #  print(t)
+        #print (symbols)
+        try:
+                t= await exch[key].fetch_tickers()
+                print(t)
+        except Exception:
+            for x in coins:
+                if exch[key] is "gdax": asyncio.sleep(1)
+                t= await exch[key].fetch_ticker(x)
+                print(t)
 
         #close our instances
         await exch[key].close()
