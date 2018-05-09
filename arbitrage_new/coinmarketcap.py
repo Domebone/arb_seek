@@ -28,7 +28,7 @@ def getExchanges(exch):
                   ,"bitthumb"]
     inc_List=["binance","bitlish","bitstamp","bittrex","bl3p","btcmarkets","btcx","ccex",
               "cex","coinexchange","coinfloor","coingi","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
-              "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
+              "kraken","kucoin","livecoin","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
               "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
 
     #reading all exchanges
@@ -53,7 +53,7 @@ async def loadInfo(exch):
         print("Loading info from-> " +key+"\n...")
         #loading all the markets
         markets = await exch[key].load_markets()
-        print(markets)
+
 
         #keeping the coins we have
         coins= exch[key].symbols
@@ -65,8 +65,10 @@ async def loadInfo(exch):
                 print(t)
         except Exception:
             for x in coins:
-                t= await exch[key].fetch_ticker(x)
-                print(t)
+                if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
+                        and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x)):
+                    t= await exch[key].fetch_ticker(x)
+                    print(t)
 
         #close our instances
         await exch[key].close()
