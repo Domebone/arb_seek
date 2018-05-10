@@ -133,6 +133,7 @@ for c in currList:
     for o in objectList:
         if o.name == c:
             currAskDic[c][o.exchange]= o.ask
+
 to_be_deleted=[]
 for b in iter(currBidDic):
     if len(currBidDic[b]) <=1 :to_be_deleted.append(b)
@@ -140,9 +141,41 @@ for t in to_be_deleted:
     del currBidDic[t]
     del currAskDic[t]
 
+#for b in currBidDic:
+    #min_bid=min(currBidDic[b].values())
+
+
+    #print("Out of: ",currBidDic[b][0] ,"This is the min bid for: ",b,": ", min_bid)
+
+#Getting the smallest
+for b in currBidDic:
+    min_bid = min(currBidDic[b].values())
+    print(min_bid)
+
+
+
+    max_ask= max(currAskDic[b].values())
+    print(max_ask)
+
+    prof_calc=max_ask/min_bid
+    min_bid_exch=""
+    max_ask_exch=""
+
+    for key,value in currBidDic[b].items():
+        if value==min_bid:
+            min_bid_exch=key
+
+    for key, value in currAskDic[b].items():
+        if value == max_ask:
+            max_ask_exch = key
+
+    print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_bid_exch ,"at price: ",min_bid," sell on: ",max_ask_exch, "for: ",max_ask)
+
 print(currList)
 print (currBidDic)
 print (currAskDic)
+
+
 
 runTime=time.time()-startTime
 print(runTime)
