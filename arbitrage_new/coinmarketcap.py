@@ -3,6 +3,9 @@ import requests
 import ccxt.async as ccxt
 import asyncio
 import time
+from ccxt.base.errors import NotSupported
+from ccxt.base.errors import DDoSProtection
+from ccxt.base.errors import RequestTimeout
 
 
 startTime=time.time()
@@ -29,7 +32,7 @@ def getExchanges(exch):
                   ,"bitthumb"]
     #list of things we actually want to include
     inc_List=["coingi", "binance","bitlish","bitstamp","bittrex","bl3p","btcmarkets","btcx","ccex"]
-    ''',
+    '''
               "cex","coinexchange","coinfloor","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
               "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
               "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]'''
@@ -55,7 +58,10 @@ async def loadInfo(exch):
     for key in exch:
         print("Loading info from-> " +key+"\n...")
         #loading all the markets
-        markets = await exch[key].load_markets()
+        try:
+            markets = await exch[key].load_markets()
+        except Exception:
+            pass
 
 
         #keeping the coins we have
@@ -76,9 +82,7 @@ async def loadInfo(exch):
                             objectList.append(CurrencyPair(stuff['symbol'], key, stuff['maxbid'], stuff['maxask']))
                         else:
                             objectList.append(CurrencyPair(stuff['symbol'], key, stuff['bid'], stuff['ask']))
-
-
-        except Exception:
+        except NotSupported:
             for x in coins:
                 if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
                         and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x)):
@@ -88,6 +92,8 @@ async def loadInfo(exch):
                     objectList.append(CurrencyPair(t['symbol'], key, t['maxbid'], t['maxask']))
                 else:
                     objectList.append(CurrencyPair(t['symbol'], key, t['bid'], t['ask']))
+        except Exception:
+            pass
 
         #close our instances
         await exch[key].close()
@@ -101,7 +107,7 @@ loop= asyncio.get_event_loop()
 
 loop.run_until_complete(loadInfo(exchanges))
 
-print(symbols)
+#print(symbols)
 
 loop.close()
 
@@ -116,20 +122,21 @@ for obj in objectList:
 currList= list(set(currList))
 
 #creating a dictionary of currencies to exchange and bids
-for x in currList:
-    exDict= {}
-    for i in objectList:
-        if i.name is x:
-            exDict[i.exchange]= i.bid
-        currBidDic[x]=exDict
 
-for x in currList:
-    exDict= {}
-    for i in objectList:
-        if i.name is x:
-            exDict[i.exchange]= i.ask
-        currAskDic[x]=exDict
 
+for c in currList:
+    currBidDic[c] = {}
+    for o in objectList:
+        if o.name == c:
+            currBidDic[c][o.exchange]= o.bid
+
+for c in currList:
+    currAskDic[c] = {}
+    for o in objectList:
+        if o.name == c:
+            currAskDic[c][o.exchange]= o.ask
+
+print(currList)
 print (currBidDic)
 print (currAskDic)
 
