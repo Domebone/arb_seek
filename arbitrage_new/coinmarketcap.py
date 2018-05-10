@@ -155,15 +155,16 @@ for b in currBidDic:
 
     max_bid = max(currBidDic[b].items())
     max_bid=max_bid[1]
-    print(max_bid)
+
 
 
 
     min_ask= min(currAskDic[b].items())
     min_ask=min_ask[1]
-    print(min_ask)
-    if max_bid > 0:
-        prof_calc=max_bid/min_ask
+    if (min_ask is not None) and (max_bid is not None):
+        if (min_ask > 0):
+
+            prof_calc=max_bid/min_ask
     min_bid_exch=""
     max_ask_exch=""
 
@@ -174,8 +175,8 @@ for b in currBidDic:
     for key, value in currAskDic[b].items():
         if value == min_ask:
             min_ask_exch = key
-
-    print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
+    if (prof_calc>1.1):
+        print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
 
 print(currList)
 print (currBidDic)
