@@ -119,7 +119,7 @@ currAskDic={}
 #creating list of unique currencies
 for obj in objectList:
     currList.append(obj.name)
-currList= list(set(currList))
+currList= list(set(currList)) #set method will remove any duplicate currency pairs
 
 #creating a dictionary of currencies to exchange and bids
 
