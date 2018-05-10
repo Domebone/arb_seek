@@ -31,11 +31,10 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["coingi", "binance","bitlish","bitstamp","bittrex","bl3p","btcmarkets","btcx","ccex"]
-    ''',
-              "cex","coinexchange","coinfloor","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
+    inc_List=["coingi", "binance","bitlish","bitstamp","bittrex","bl3p","btcmarkets","btcx","ccex",
+              "cex","coinexchange","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
               "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]'''
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -69,29 +68,32 @@ async def loadInfo(exch):
         symbols.append(coins)
 
         try:
-                #geting all info and coins if we can
-                if exch[key] is 'ccex': raise NotSupported
-                t= await exch[key].fetch_tickers()
-                for c in coins:
-                    stuff={}
-                    #checking that we got all the coins in our fetch tickers, sometimes our symbol fetch wont match the actual tickers
-                    if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
-                        and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c)):
-                        stuff = t[c]
-                        #some exchanges have maxbid instead of regular bid
-                        if 'maxbid' in stuff:
-                            objectList.append(CurrencyPair(stuff['symbol'], key, stuff['maxbid'], stuff['maxask']))
-                        else:
-                            objectList.append(CurrencyPair(stuff['symbol'], key, stuff['bid'], stuff['ask']))
+            #geting all info and coins if we can
+            if exch[key] is 'ccex': raise NotSupported
+            t= await exch[key].fetch_tickers()
+            for c in coins:
+                stuff={}
+                #checking that we got all the coins in our fetch tickers, sometimes our symbol fetch wont match the actual tickers
+                if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
+                    and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c)):
+                    stuff = t[c]
+                    #some exchanges have maxbid instead of regular bid
+                    if 'maxbid' in stuff:
+                        objectList.append(CurrencyPair(stuff['symbol'], key, stuff['maxbid'], stuff['maxask']))
+                    else:
+                        objectList.append(CurrencyPair(stuff['symbol'], key, stuff['bid'], stuff['ask']))
         except NotSupported:
-            for x in coins:
-                if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
-                        and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x)):
-                    t= await exch[key].fetch_ticker(x)
-                if 'maxbid' in t:
-                    objectList.append(CurrencyPair(t['symbol'], key, t['maxbid'], t['maxask']))
-                else:
-                    objectList.append(CurrencyPair(t['symbol'], key, t['bid'], t['ask']))
+            try:
+                for x in coins:
+                    if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
+                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x)):
+                        t= await exch[key].fetch_ticker(x)
+                    if 'maxbid' in t:
+                        objectList.append(CurrencyPair(t['symbol'], key, t['maxbid'], t['maxask']))
+                    else:
+                        objectList.append(CurrencyPair(t['symbol'], key, t['bid'], t['ask']))
+            except Exception:
+                pass
         except Exception:
             pass
 
@@ -134,14 +136,10 @@ for c in currList:
         if o.name == c:
             currAskDic[c][o.exchange]= o.ask
 
-#Initializing list of values to be deleted
+x= len(currAskDic)
 to_be_deleted=[]
-
-#filing out list of keys that have less that than 2 len 2 at their dict val
 for b in iter(currBidDic):
     if len(currBidDic[b]) <=1 :to_be_deleted.append(b)
-
-#removing keys with a dict values of len less than 2
 for t in to_be_deleted:
     del currBidDic[t]
     del currAskDic[t]
@@ -149,8 +147,8 @@ for t in to_be_deleted:
 print(currList)
 print (currBidDic)
 print (currAskDic)
+print (x)
 print (len(currAskDic))
-
 
 runTime=time.time()-startTime
 print(runTime)
