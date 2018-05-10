@@ -134,9 +134,15 @@ for c in currList:
         if o.name == c:
             currAskDic[c][o.exchange]= o.ask
 
+#Initializing list of values to be deleted
+
 to_be_deleted=[]
+
+#filing out list of keys that have less that than 2 len 2 at their dict val
 for b in iter(currBidDic):
     if len(currBidDic[b]) <=1 :to_be_deleted.append(b)
+
+#removing keys with a dict values of len less than 2
 for t in to_be_deleted:
     del currBidDic[t]
     del currAskDic[t]
@@ -174,6 +180,8 @@ for b in currBidDic:
 print(currList)
 print (currBidDic)
 print (currAskDic)
+print (len(currAskDic))
+
 
 
 
