@@ -149,6 +149,8 @@ for t in to_be_deleted:
 print(currList)
 print (currBidDic)
 print (currAskDic)
+print (len(currAskDic))
+
 
 runTime=time.time()-startTime
 print(runTime)
