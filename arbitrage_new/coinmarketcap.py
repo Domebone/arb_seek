@@ -153,29 +153,29 @@ for t in to_be_deleted:
 #Getting the smallest
 for b in currBidDic:
 
-    min_bid = min(currBidDic[b].items())
-    min_bid=min_bid[1]
-    print(min_bid)
+    max_bid = max(currBidDic[b].items())
+    max_bid=max_bid[1]
+    print(max_bid)
 
 
 
-    max_ask= max(currAskDic[b].items())
-    max_ask=max_ask[1]
-    print(max_ask)
-    if(min_bid > 0):
-        prof_calc=max_ask/min_bid
+    min_ask= min(currAskDic[b].items())
+    min_ask=min_ask[1]
+    print(min_ask)
+    if max_bid > 0:
+        prof_calc=max_bid/min_ask
     min_bid_exch=""
     max_ask_exch=""
 
     for key,value in currBidDic[b].items():
-        if value==min_bid:
-            min_bid_exch=key
+        if value==max_bid:
+            max_bid_exch=key
 
     for key, value in currAskDic[b].items():
-        if value == max_ask:
-            max_ask_exch = key
+        if value == min_ask:
+            min_ask_exch = key
 
-    print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_bid_exch ,"at price: ",min_bid," sell on: ",max_ask_exch, "for: ",max_ask)
+    print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
 
 print(currList)
 print (currBidDic)
