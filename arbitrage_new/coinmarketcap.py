@@ -31,7 +31,7 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["coingi", "binance","bitlish","bitstamp","bittrex","bl3p","btcmarkets","btcx","ccex",
+    inc_List=["coingi", "binance","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx","ccex",
               "cex","coinexchange","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
               "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
               "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
@@ -69,7 +69,7 @@ async def loadInfo(exch):
 
         try:
             #geting all info and coins if we can
-            if exch[key] is 'ccex': raise NotSupported
+            if exch[key] is 'coinfloor': raise NotSupported
             t= await exch[key].fetch_tickers()
             for c in coins:
                 stuff={}
