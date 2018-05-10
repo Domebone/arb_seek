@@ -67,8 +67,9 @@ async def loadInfo(exch):
                 t= await exch[key].fetch_tickers()
                 for c in coins:
                     stuff={}
-                    #checking that we got all the coins in our fetch tickers
-                    if c in t:
+                    #checking that we got all the coins in our fetch tickers, sometimes our symbol fetch wont match the actual tickers
+                    if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
+                        and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c)):
                         stuff = t[c]
                         #some exchanges have maxbid instead of regular bid
                         if 'maxbid' in stuff:
