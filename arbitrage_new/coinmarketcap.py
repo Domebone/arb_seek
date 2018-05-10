@@ -144,6 +144,39 @@ for t in to_be_deleted:
     del currBidDic[t]
     del currAskDic[t]
 
+#for b in currBidDic:
+    #min_bid=min(currBidDic[b].values())
+
+
+    #print("Out of: ",currBidDic[b][0] ,"This is the min bid for: ",b,": ", min_bid)
+
+#Getting the smallest
+for b in currBidDic:
+
+    min_bid = min(currBidDic[b].items())
+    min_bid=min_bid[1]
+    print(min_bid)
+
+
+
+    max_ask= max(currAskDic[b].items())
+    max_ask=max_ask[1]
+    print(max_ask)
+    if(min_bid > 0):
+        prof_calc=max_ask/min_bid
+    min_bid_exch=""
+    max_ask_exch=""
+
+    for key,value in currBidDic[b].items():
+        if value==min_bid:
+            min_bid_exch=key
+
+    for key, value in currAskDic[b].items():
+        if value == max_ask:
+            max_ask_exch = key
+
+    print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_bid_exch ,"at price: ",min_bid," sell on: ",max_ask_exch, "for: ",max_ask)
+
 print(currList)
 print (currBidDic)
 print (currAskDic)
