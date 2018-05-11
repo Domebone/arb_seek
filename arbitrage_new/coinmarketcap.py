@@ -6,7 +6,7 @@ import time
 from ccxt.base.errors import NotSupported
 from ccxt.base.errors import DDoSProtection
 from ccxt.base.errors import RequestTimeout
-
+from OrderBook_fetch import fetchOrderBook
 
 
 startTime=time.time()
@@ -77,7 +77,8 @@ async def loadInfo(exch):
                 stuff={}
                 #checking that we got all the coins in our fetch tickers, sometimes our symbol fetch wont match the actual tickers
                 if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
-                    and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c) and("BEE" not in c) and ("VRS") not in c):
+                    and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c) and("BEE" not in c) and ("VRS") not in c)\
+                        and ("AIO" not in c):
                     stuff = t[c]
                     #some exchanges have maxbid instead of regular bid
                     if 'maxbid' in stuff:
@@ -88,7 +89,8 @@ async def loadInfo(exch):
             try:
                 for x in coins:
                     if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
-                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in c) and ("VRS") not in c):
+                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in c) and ("VRS") not in c) \
+                            and ("AIO" not in c):
                         t= await exch[key].fetch_ticker(x)
                     if 'maxbid' in t:
                         objectList.append(CurrencyPair(t['symbol'], key, t['maxbid'], t['maxask']))
@@ -146,17 +148,10 @@ for t in to_be_deleted:
     del currBidDic[t]
     del currAskDic[t]
 
-#for b in currBidDic:
-    #min_bid=min(currBidDic[b].values())
 
-
-    #print("Out of: ",currBidDic[b][0] ,"This is the min bid for: ",b,": ", min_bid)
-
-#Getting the smallest
 
 arbDic={}
-bid_order_book={}
-ask_order_book={}
+
 for b in currBidDic:
 
     prof_calc=0
@@ -186,16 +181,9 @@ for b in currBidDic:
 
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
         arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
+        fetchOrderBook(min_ask_exch,"ask", b)
+        fetchOrderBook(max_bid_exch, "bid", b)
 
-        for x in exchanges:         #go back to fetch order book for our arb op and check what volume is appropriate
-            if x is min_ask_exch:
-
-                ask_order_book= exchanges[x].fetch_order_book(b)
-                print("Order book for: ",x, " is ",ask_order_book," this is where you should buy!")
-            if x is max_bid_exch:
-
-                bid_order_book=exchanges[x].fetch_order_book(b)
-                print("Order book for: ", x, " is ",bid_order_book ,"this is where you should sell!")
 
 print(arbDic,len(arbDic))
 
