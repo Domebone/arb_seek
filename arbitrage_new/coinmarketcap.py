@@ -31,10 +31,12 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["coingi", "binance","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx","ccex",
-              "cex","coinexchange","coinmate","dsx","ethfinex","gemini","hitbtc","hitbtc2",
-              "kraken","kucoin","livecoin","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
+    inc_List=[ "binance","ethfinex","kucoin","livecoin","ccex"]
+
+              '''  ["coingi","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx",
+              "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
+              "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]'''
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -75,7 +77,7 @@ async def loadInfo(exch):
                 stuff={}
                 #checking that we got all the coins in our fetch tickers, sometimes our symbol fetch wont match the actual tickers
                 if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
-                    and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c)):
+                    and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c) and("BEE" not in c) and ("VRS") not in c):
                     stuff = t[c]
                     #some exchanges have maxbid instead of regular bid
                     if 'maxbid' in stuff:
@@ -86,7 +88,7 @@ async def loadInfo(exch):
             try:
                 for x in coins:
                     if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
-                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x)):
+                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in c) and ("VRS") not in c):
                         t= await exch[key].fetch_ticker(x)
                     if 'maxbid' in t:
                         objectList.append(CurrencyPair(t['symbol'], key, t['maxbid'], t['maxask']))
@@ -161,7 +163,7 @@ for b in currBidDic:
 
     min_ask= min(currAskDic[b].items())
     min_ask=min_ask[1]
-    if (min_ask is not None) and (max_bid is not None):
+    if (min_ask is not None) and (max_bid is not None): #had some problems where min_ask or max_bid would be None
         if (min_ask > 0):
 
             prof_calc=max_bid/min_ask
@@ -181,8 +183,7 @@ for b in currBidDic:
 print(currList)
 print (currBidDic)
 print (currAskDic)
-print (x)
-print (len(currAskDic))
+
 
 runTime=time.time()-startTime
 print(runTime)
