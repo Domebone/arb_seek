@@ -8,6 +8,7 @@ from ccxt.base.errors import DDoSProtection
 from ccxt.base.errors import RequestTimeout
 
 
+
 startTime=time.time()
 
 class CurrencyPair:									# Each unique Currency PAIR from each unique exchange will become an object
@@ -17,7 +18,6 @@ class CurrencyPair:									# Each unique Currency PAIR from each unique exchang
         self.exchange = exchange
         self.bid = bid
         self.ask = ask
-
 
 
 # Our instance of our different exchanges will be held in a dict, indexed by exchange id.
@@ -31,12 +31,12 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=[ "binance","ethfinex","kucoin","livecoin","ccex"]
+    inc_List=["binance","ethfinex","kucoin","livecoin","ccex"]
 
-              '''  ["coingi","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx",
+    '''["coingi","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx",
               "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]'''
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"] '''
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -155,6 +155,8 @@ for t in to_be_deleted:
 #Getting the smallest
 
 arbDic={}
+bid_order_book={}
+ask_order_book={}
 for b in currBidDic:
 
     prof_calc=0
@@ -181,15 +183,27 @@ for b in currBidDic:
         if value == min_ask:
             min_ask_exch = key
     if prof_calc>1.1:
+
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
         arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
+
+        for x in exchanges:         #go back to fetch order book for our arb op and check what volume is appropriate
+            if x is min_ask_exch:
+
+                ask_order_book= exchanges[x].fetch_order_book(b)
+                print("Order book for: ",x, " is ",ask_order_book," this is where you should buy!")
+            if x is max_bid_exch:
+
+                bid_order_book=exchanges[x].fetch_order_book(b)
+                print("Order book for: ", x, " is ",bid_order_book ,"this is where you should sell!")
+
 print(arbDic,len(arbDic))
 
 #print(currList)
 #print (currBidDic)
 #print (currAskDic)
 print (x)
-print (len(currAskDic))
+#print (len(currAskDic))
 
 runTime=time.time()-startTime
 print(runTime)
