@@ -153,14 +153,17 @@ for t in to_be_deleted:
     #print("Out of: ",currBidDic[b][0] ,"This is the min bid for: ",b,": ", min_bid)
 
 #Getting the smallest
+
+arbDic={}
 for b in currBidDic:
 
+    prof_calc=0
+
+    #get max bid
     max_bid = max(currBidDic[b].items())
     max_bid=max_bid[1]
 
-
-
-
+    #get min
     min_ask= min(currAskDic[b].items())
     min_ask=min_ask[1]
     if (min_ask is not None) and (max_bid is not None): #had some problems where min_ask or max_bid would be None
@@ -177,43 +180,16 @@ for b in currBidDic:
     for key, value in currAskDic[b].items():
         if value == min_ask:
             min_ask_exch = key
-    if (prof_calc>1.1):
+    if prof_calc>1.1:
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
+        arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
+print(arbDic,len(arbDic))
 
-print(currList)
-print (currBidDic)
-print (currAskDic)
-
+#print(currList)
+#print (currBidDic)
+#print (currAskDic)
+print (x)
+print (len(currAskDic))
 
 runTime=time.time()-startTime
 print(runTime)
-
-'''
-#--------------------------COMPARISON---------------------------------#
-print("Master List: ")
-for i in range(len(master_list)):
-    print(master_list[i])
-
-temp_list=[]
-
-#we check all the matches
-
-for i in range(len(master_list)):
-    for j in range(len(master_list[i])):
-        for k in range(len(master_list)):
-            for l in range(len(master_list[k])):
-                if ((master_list[i][j].lower()==master_list[k][l].lower()) and i != k):
-                    if([i,j] not in index_list):
-                        temp_list.append(i)
-                        temp_list.append(j)
-                        index_list.append(temp_list)	#we append the index of the matches
-                        temp_list=[]
-                    if([k,l] not in index_list):
-                        temp_list.append(k)
-                        temp_list.append(l)
-                        index_list.append(temp_list)
-                        temp_list=[]
-                        print("Match!")
-
-
-'''
