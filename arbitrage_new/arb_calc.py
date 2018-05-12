@@ -6,7 +6,7 @@ import time
 from ccxt.base.errors import NotSupported
 from ccxt.base.errors import DDoSProtection
 from ccxt.base.errors import RequestTimeout
-from OrderBook_fetch import fetchOrderBook
+from OrderBook_Calc import VolumeOptimize
 
 
 startTime=time.time()
@@ -31,11 +31,11 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["binance","ethfinex","kucoin","livecoin","ccex",
-    "coingi","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx",
+    inc_List=["binance","ethfinex","kucoin","livecoin","ccex"]
+    ''' '"coingi","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx",
               "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"] '''
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -180,8 +180,8 @@ for b in currBidDic:
 
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
         arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
-        fetchOrderBook(min_ask_exch,"ask", b)
-        fetchOrderBook(max_bid_exch, "bid", b)
+        VolumeOptimize(min_ask_exch, max_bid_exch, "ask", b)
+
 
 
 print(arbDic,len(arbDic))
