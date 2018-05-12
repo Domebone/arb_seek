@@ -31,12 +31,11 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["binance","ethfinex","kucoin","livecoin","ccex"]
-
-    '''["coingi","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx",
+    inc_List=["binance","ethfinex","kucoin","livecoin","ccex",
+    "coingi","bitlish","bitstamp","bittrex", "coinfloor","bl3p","btcmarkets","btcx",
               "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"] '''
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc"]
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -78,7 +77,7 @@ async def loadInfo(exch):
                 #checking that we got all the coins in our fetch tickers, sometimes our symbol fetch wont match the actual tickers
                 if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
                     and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c) and("BEE" not in c) and ("VRS") not in c)\
-                        and ("AIO" not in c):
+                        and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c):
                     stuff = t[c]
                     #some exchanges have maxbid instead of regular bid
                     if 'maxbid' in stuff:
@@ -90,7 +89,7 @@ async def loadInfo(exch):
                 for x in coins:
                     if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
                             and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in c) and ("VRS") not in c) \
-                            and ("AIO" not in c):
+                            and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c):
                         t= await exch[key].fetch_ticker(x)
                     if 'maxbid' in t:
                         objectList.append(CurrencyPair(t['symbol'], key, t['maxbid'], t['maxask']))
