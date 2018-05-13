@@ -18,7 +18,7 @@ def coinmarketcapPriceFetch(symbol):
     for x in data:
         sym=x['symbol']
 
-        if subs == sym:
+        if subs == sym and "JPY":
 
             id=x['id']
 

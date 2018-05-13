@@ -8,8 +8,11 @@ ask_order_book={}
 
 
 def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book for our arb op and check what volume is appropriate
-
-    dollar_price = coinmarketcapPriceFetch(symbol)
+    dollar_price=0
+    if "JPY" not in symbol and "USD" not in symbol:
+        dollar_price = coinmarketcapPriceFetch(symbol)
+    if("USD" in symbol):
+        dollar_price=1
 
     #initiating some vars
     ask_sum=0
@@ -79,29 +82,29 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
         if(len(adjusted_first)>0):
 
             sum1=sum(adjusted_first)/len(adjusted_first)
-            if(sum1>1.1):
+            if(sum1>1.04):
                 print("With 100$ or less you have the following arbitrage: ", sum1)
         else: print("Volume is high enough that you can use more than 100$ and be profitable")
         if(len(adjusted_second)>0):
             sum2 = sum(adjusted_second) / len(adjusted_second)
-            if (sum2>1.1):
+            if (sum2>1.04):
 
                 print("With 500$ or less you have the following arbitrage: ", sum2)
-            else: print("With 100-500$, arbitrage drops below 10% profit")
+            else: print("With 100-500$, arbitrage drops below 4% profit")
         else: print("If youre using 100-500$, check order books Manually")
         if(len(adjusted_third)>0):
             sum3 = sum(adjusted_third) / len(adjusted_third)
-            if(sum3>1.1):
+            if(sum3>1.04):
 
                 print("With 1000$ or less you have the following arbitrage: ", sum3)
-            else: print("With 500-1000$, arbitrage drops below 10% profit")
+            else: print("With 500-1000$, arbitrage drops below 4% profit")
         else:print("Check Data between 500-1000$ Manually")
         if(len(adjusted_fourth)>0):
             sum4 = sum(adjusted_fourth) / len(adjusted_fourth)
-            if (sum4>1.1):
+            if (sum4>1.04):
 
                 print("With 5000$ or less you have the following arbitrage: ", sum4)
-            else: print("Between 1000-5000$, arbitrage drops below 10% profit")
+            else: print("Between 1000-5000$, arbitrage drops below 4% profit")
         else: print("No arb ops between 1000-5000$ or not enough data from exchange. Verify Manually")
 
 

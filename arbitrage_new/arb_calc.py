@@ -77,7 +77,7 @@ async def loadInfo(exch):
                 if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
                     and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c) and("BEE" not in c) and ("VRS") not in c)\
                         and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c) and ("ORE" not in c) and ("CNNC" not in c) and ("KURT" not in c) \
-                        and ("KAYI" not in c):
+                        and ("KAYI" not in c) and ("VIDZ" not in c) and ("MYB" not in c) and ("OC" not in c) and ("CRC" not in c):
                     stuff = t[c]
 
                     #some exchanges have maxbid instead of regular bid
@@ -91,9 +91,9 @@ async def loadInfo(exch):
                 for x in coins:
 
                     if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
-                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in c) and ("VRS") not in c)\
-                            and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c) and ("ORE" not in c) and ("CNNC" not in c) and ("KURT" not in c)\
-                            and ("KAYI" not in c):
+                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in x) and ("VRS") not in x)\
+                            and ("AIO" not in x) and ("GET" not in x) and ("ATX" not in x) and ("ORE" not in x) and ("CNNC" not in x) and ("KURT" not in x)\
+                            and ("KAYI" not in x) and ("VIDZ" not in x) and ("MYB" not in x) and ("OC" not in x) and ("CRC" not in x):
                         t= await exch[key].fetch_ticker(x)
 
                     if 'maxbid' in t:
@@ -183,7 +183,7 @@ for b in currBidDic:
             min_ask_exch = key
     #only taking arb ops of 1.1 or higher but lower than 1.75 to exclude anomalies from blocked wallets
     #also want to exlcude token conversions
-    if prof_calc>1.1 and prof_calc<1.75:
+    if 1.04 < prof_calc < 1.3:
 
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
         arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
