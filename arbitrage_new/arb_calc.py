@@ -181,7 +181,8 @@ for b in currBidDic:
     for key, value in currAskDic[b].items():
         if value == min_ask:
             min_ask_exch = key
-    if prof_calc>1.1:
+    #only taking arb ops of 1.1 or higher but lower than 1.75 to exclude anomalies from blocked wallets
+    if prof_calc>1.1 and prof_calc<1.75:
 
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
         arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
