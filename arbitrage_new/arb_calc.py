@@ -182,6 +182,7 @@ for b in currBidDic:
         if value == min_ask:
             min_ask_exch = key
     #only taking arb ops of 1.1 or higher but lower than 1.75 to exclude anomalies from blocked wallets
+    #also want to exlcude token conversions
     if prof_calc>1.1 and prof_calc<1.75:
 
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
