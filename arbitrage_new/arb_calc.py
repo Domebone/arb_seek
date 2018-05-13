@@ -76,20 +76,26 @@ async def loadInfo(exch):
                 #checking that we got all the coins in our fetch tickers, sometimes our symbol fetch wont match the actual tickers
                 if ((c in t) and ("CNY" not in c) and ("RUB" not in c) and ("/DOGE" not in c) and ("AUD" not in c) and ("PLN" not in c)
                     and ("GBP" not in c) and ("/WAVES" not in c) and ("WEUR" not in c) and ("WUSD" not in c) and("BEE" not in c) and ("VRS") not in c)\
-                        and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c):
+                        and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c) and ("ORE" not in c) and ("CNNC" not in c) and ("KURT" not in c) \
+                        and ("KAYI" not in c):
                     stuff = t[c]
+
                     #some exchanges have maxbid instead of regular bid
-                    if 'maxbid' in stuff:
+                    if ('maxbid' in stuff):
+
                         objectList.append(CurrencyPair(stuff['symbol'], key, stuff['maxbid'], stuff['maxask']))
                     else:
                         objectList.append(CurrencyPair(stuff['symbol'], key, stuff['bid'], stuff['ask']))
         except NotSupported:
             try:
                 for x in coins:
+
                     if(("CNY" not in x) and ("RUB" not in x) and ("/DOGE" not in x) and ("AUD" not in x) and ("PLN" not in x)
-                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in c) and ("VRS") not in c) \
-                            and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c):
+                            and ("GBP" not in x) and ("/WAVES" not in x) and ("WEUR" not in x) and ("WUSD" not in x) and("BEE" not in c) and ("VRS") not in c)\
+                            and ("AIO" not in c) and ("GET" not in c) and ("ATX" not in c) and ("ORE" not in c) and ("CNNC" not in c) and ("KURT" not in c)\
+                            and ("KAYI" not in c):
                         t= await exch[key].fetch_ticker(x)
+
                     if 'maxbid' in t:
                         objectList.append(CurrencyPair(t['symbol'], key, t['maxbid'], t['maxask']))
                     else:
