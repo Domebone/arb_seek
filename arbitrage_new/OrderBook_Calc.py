@@ -1,3 +1,5 @@
+from typing import Any, Union
+
 import ccxt
 from sub import coinmarketcapPriceFetch
 
@@ -5,43 +7,105 @@ bid_order_book={}
 ask_order_book={}
 
 
-def VolumeOptimize(exchange1,exchange2 ,type, symbol):  # go back to fetch order book for our arb op and check what volume is appropriate
+def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book for our arb op and check what volume is appropriate
 
     dollar_price = coinmarketcapPriceFetch(symbol)
 
     #initiating some vars
-    vol_sum = 0
-    adj_price = 0
+    ask_sum=0
+    bid_sum=0
     length=0
+    price_comp=0
+    adjusted_first=[]
+    adjusted_second=[]
+    adjusted_third=[]
+    adjusted_fourth=[]
+
 
     #instantiating our exchanges
     exchange1_name=exchange1
     exchange1=getattr(ccxt, exchange1)
     exch1_inst=exchange1()
+
     exchange2_name = exchange2
     exchange2 = getattr(ccxt, exchange2)
     exch2_inst = exchange2()
 
-    ask_order_book = exch1_inst.fetch_order_book(symbol)['asks']
-    if (len(ask_order_book)>20):
-        length=20
+    ask_order_book = exch1_inst.fetch_order_book(symbol,50)['asks']
+    bid_order_book = exch2_inst.fetch_order_book(symbol,50)['bids']
+    bid_length = len(bid_order_book)
+    ask_length= len(ask_order_book)
+    if bid_length>=ask_length:
+        length=ask_length
     else:
-        length=len(ask_order_book)
-    for i in range(0,length):   #sum of volume
-        vol_sum=vol_sum+ask_order_book[i][1]
-    for i in range(0,length):   #weighted average
-        adj_price=adj_price+((ask_order_book[i][1]/vol_sum)*ask_order_book[i][0])
-    print("Asks for: ", symbol, " on ",exchange_name,": ",ask_order_book)
-    print ("Adjusted ask price: ", adj_price, " for ",vol_sum," coins.")
+        length=bid_length
 
-    bid_order_book = exch_inst.fetch_order_book(symbol)['bids']
-    if (len(bid_order_book)>20):
-        length=20
-    else:
-        length=len(bid_order_book)
-    for i in range(0, length):  # sum of volume
-        vol_sum = vol_sum + bid_order_book[i][1]
-    for i in range(0, length):  # weighted average
-        adj_price = adj_price + ((bid_order_book[i][1] / vol_sum) * bid_order_book[i][0])
-    print("Bids for: ", symbol, " on ", exchange_name, ": ", bid_order_book)
-    print("Adjusted bid price: ", adj_price, " for ", vol_sum, " coins.")
+
+
+
+    try:
+        for i in range(0,length):
+            ask_sum+=(ask_order_book[i][0]*ask_order_book[i][1])
+            bid_sum += (bid_order_book[i][0] * bid_order_book[i][1])
+            price_comp=bid_order_book[i][0]/ask_order_book[i][0]
+
+            ask_dollar=dollar_price*ask_sum
+            bid_dollar=dollar_price*bid_sum
+
+
+
+            if (bid_dollar or ask_dollar)<100:
+                adjusted_first.append(price_comp)
+
+
+
+            if (bid_dollar or ask_dollar)<500 and (bid_dollar or ask_dollar)>=100:
+
+                adjusted_second.append(price_comp)
+
+            if (bid_dollar or ask_dollar)<1000 and (bid_dollar or ask_dollar)>=500:
+
+                adjusted_third.append(price_comp)
+
+            if (bid_dollar or ask_dollar)<5000 and (bid_dollar or ask_dollar)>=1000:
+
+                adjusted_fourth.append(price_comp)
+
+
+
+
+
+
+        if(len(adjusted_first)>0):
+
+            sum1=sum(adjusted_first)/len(adjusted_first)
+            if(sum1>1.1):
+                print("With 100$ or less you have the following arbitrage: ", sum1)
+
+        if(len(adjusted_second)>0):
+            sum2 = sum(adjusted_second) / len(adjusted_second)
+            if (sum2>1.1):
+
+                print("With 500$ or less you have the following arbitrage: ", sum2)
+
+        if(len(adjusted_third)>0):
+            sum3 = sum(adjusted_third) / len(adjusted_third)
+            if(sum3>1.1):
+
+                print("With 1000$ or less you have the following arbitrage: ", sum3)
+
+        if(len(adjusted_fourth)>0):
+            sum4 = sum(adjusted_fourth) / len(adjusted_fourth)
+            if (sum4>1.1):
+
+                print("With 5000$ or less you have the following arbitrage: ", sum4)
+
+
+    except IndexError:
+        print("Less than ", i , "orders. Investigate manually.")
+
+
+
+
+
+
