@@ -53,7 +53,7 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
             bid_sum += (bid_order_book[i][0] * bid_order_book[i][1])
             price_comp=bid_order_book[i][0]/ask_order_book[i][0]
 
-
+            ask_dollar=bid_dollar=0
             if price_comp>1.025:
                 ask_dollar=dollar_price*ask_sum
                 bid_dollar=dollar_price*bid_sum
