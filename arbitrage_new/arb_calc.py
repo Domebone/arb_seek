@@ -31,8 +31,8 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex"]\
-        ''' "coinfloor","bl3p","btcmarkets","btcx",
+    inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex"]
+    ''' "coinfloor","bl3p","btcmarkets","btcx",
               "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
               "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]'''
@@ -170,7 +170,6 @@ for b in currBidDic:
     min_ask=min_ask[1]
     if (min_ask is not None) and (max_bid is not None): #had some problems where min_ask or max_bid would be None
         if (min_ask > 0):
-
             prof_calc=max_bid/min_ask
     min_bid_exch=""
     max_ask_exch=""

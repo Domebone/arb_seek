@@ -53,28 +53,34 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
             bid_sum += (bid_order_book[i][0] * bid_order_book[i][1])
             price_comp=bid_order_book[i][0]/ask_order_book[i][0]
 
-            ask_dollar=dollar_price*ask_sum
-            bid_dollar=dollar_price*bid_sum
 
-            print("Asks: Between 0 and ",ask_dollar, " you have ",price_comp," arbitrage.")
-            print("Bids: Between 0 and ", bid_dollar, "you have ", price_comp, " arbitrage.")
+            if price_comp>1.025:
+                ask_dollar=dollar_price*ask_sum
+                bid_dollar=dollar_price*bid_sum
 
-            if (bid_dollar or ask_dollar)<100:
-                adjusted_first.append(price_comp)
+                #print("Asks: Between 0 and ",ask_dollar, " you have ",price_comp," arbitrage.")
+                #print("Bids: Between 0 and ", bid_dollar, "you have ", price_comp, " arbitrage.")
+
+                if (bid_dollar or ask_dollar)<100:
+                    adjusted_first.append(price_comp)
 
 
 
-            if (bid_dollar or ask_dollar)<500 and (bid_dollar or ask_dollar)>=100:
+                if (bid_dollar or ask_dollar)<500 and (bid_dollar or ask_dollar)>=100:
 
-                adjusted_second.append(price_comp)
+                    adjusted_second.append(price_comp)
 
-            if (bid_dollar or ask_dollar)<1000 and (bid_dollar or ask_dollar)>=500:
 
-                adjusted_third.append(price_comp)
+                if (bid_dollar or ask_dollar)<1000 and (bid_dollar or ask_dollar)>=500:
 
-            if (bid_dollar or ask_dollar)<5000 and (bid_dollar or ask_dollar)>=1000:
+                    adjusted_third.append(price_comp)
 
-                adjusted_fourth.append(price_comp)
+                if (bid_dollar or ask_dollar)<5000 and (bid_dollar or ask_dollar)>=1000:
+
+                    adjusted_fourth.append(price_comp)
+            else:
+                print ("Min" , min (ask_dollar, bid_dollar))
+                break
 
 
 
