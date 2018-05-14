@@ -43,7 +43,8 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
     else:
         length=bid_length
 
-
+    print(ask_order_book)
+    print(bid_order_book)
 
 
     try:
@@ -55,7 +56,8 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
             ask_dollar=dollar_price*ask_sum
             bid_dollar=dollar_price*bid_sum
 
-
+            print("Asks: Between 0 and ",ask_dollar, " you have ",price_comp," arbitrage.")
+            print("Bids: Between 0 and ", bid_dollar, "you have ", price_comp, " arbitrage.")
 
             if (bid_dollar or ask_dollar)<100:
                 adjusted_first.append(price_comp)
