@@ -25,7 +25,7 @@ def coinmarketcapPriceFetch(symbol):
     TickerURL+=str(id)
 
     request=requests.get(TickerURL)
-    data=request.json()['data']['quotes']['USD']
+    data=request.json()['data']['quotes']['USD']    #sometimes throws a quotes exception
 
     price=data['price']
 

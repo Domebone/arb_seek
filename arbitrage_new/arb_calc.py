@@ -32,11 +32,11 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex"]
-    '''["coinfloor","bl3p","btcmarkets","btcx",
+    inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex",
+    "coinfloor","bl3p","btcmarkets","btcx",
               "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]'''
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -184,12 +184,22 @@ for b in currBidDic:
             min_ask_exch = key
     #only taking arb ops of 1.1 or higher but lower than 1.75 to exclude anomalies from blocked wallets
     #also want to exlcude token conversions
+    tryAgain=True
     if 1.04 < prof_calc < 1.2:
 
         print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
         arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
+
         VolumeOptimize(min_ask_exch, max_bid_exch, b)
-        checker(min_ask_exch,max_bid_exch,b)
+        '''while tryAgain:
+            try:
+                
+                tryAgain=False
+            except KeyError:
+                print("Reattempting to fetch currency values in dollars from coinmarketcap.")
+                sleep(2)'''
+        checker(min_ask_exch,b)
+        checker(max_bid_exch,b)
 
 
 #print(arbDic,len(arbDic))

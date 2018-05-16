@@ -9,7 +9,7 @@ ask_order_book={}
 
 def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book for our arb op and check what volume is appropriate
     dollar_price=0
-    if "JPY" not in symbol and "USD" not in symbol:
+    if "JPY" not in symbol and "USD" not in symbol and "EUR" not in symbol:
         dollar_price = coinmarketcapPriceFetch(symbol)
     if("USD" in symbol):
         dollar_price=1
@@ -43,8 +43,7 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
     else:
         length=bid_length
 
-    print(ask_order_book)
-    print(bid_order_book)
+
 
 
     try:
@@ -53,33 +52,20 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
             bid_sum += (bid_order_book[i][0] * bid_order_book[i][1])
             price_comp=bid_order_book[i][0]/ask_order_book[i][0]
 
-            ask_dollar=bid_dollar=0
+
+            ask_dollar=bid_dollar=0 #initializing the variables outside of if statement
+
             if price_comp>1.025:
-                ask_dollar=dollar_price*ask_sum
-                bid_dollar=dollar_price*bid_sum
-
-                #print("Asks: Between 0 and ",ask_dollar, " you have ",price_comp," arbitrage.")
-                #print("Bids: Between 0 and ", bid_dollar, "you have ", price_comp, " arbitrage.")
-
-                if (bid_dollar or ask_dollar)<100:
-                    adjusted_first.append(price_comp)
+                continue
 
 
 
-                if (bid_dollar or ask_dollar)<500 and (bid_dollar or ask_dollar)>=100:
-
-                    adjusted_second.append(price_comp)
-
-
-                if (bid_dollar or ask_dollar)<1000 and (bid_dollar or ask_dollar)>=500:
-
-                    adjusted_third.append(price_comp)
-
-                if (bid_dollar or ask_dollar)<5000 and (bid_dollar or ask_dollar)>=1000:
-
-                    adjusted_fourth.append(price_comp)
             else:
-                print ("Min" , min (ask_dollar, bid_dollar))
+                ask_dollar = dollar_price * ask_sum
+                bid_dollar = dollar_price * bid_sum
+                if min(ask_dollar,bid_dollar) >99:
+
+                    print ("Max amount recommended to retain profitability: " , min (ask_dollar, bid_dollar))
                 break
 
 
