@@ -25,7 +25,7 @@ def checker(exchange, symbol):
     elif (exchange_name =="coinexchange"):
 
 
-        print("Wallet status is: ", exch_inst.currencies[subs]['info']["walletStatus"], "for coinexchange.")
+        print("Wallet status is: ", exch_inst.currencies[subs]['info']['WalletStatus'], "for coinexchange.")
 
     elif (exchange_name=="hitbtc2"):
 
@@ -46,7 +46,7 @@ def checker(exchange, symbol):
         else:
             print("Huobipro wallet inactive.")
 
-    elif(exhcange_name=="cobinhood"):
+    elif(exchange_name=="cobinhood"):
         if(exch_inst.currencies[subs]['info']['deposit_frozen'] and exch_inst.currencies[subs]['info']['withdrawal_frozen'] == False):
             print("Cobinhood wallet inactive.")
 
@@ -70,22 +70,6 @@ def checker(exchange, symbol):
         print(exchange_name)
         print(exch_inst.currencies)
 
-    #idx = symbol.find('/')
-    #subs = symbol[:idx]
-    #id = ""
-
-    #print(type(symbol))
-
-    # instantiating our exchanges        #getting min ask
-    #exchange1_name = exchange1  # storing the name of the exchange as a string
-    #exchange1 = getattr(ccxt, exchange1)
-    #exch1_inst = exchange1()
-    #exch1_inst.load_markets()
-
-    #exchange2_name = exchange2  # get max bid
-    #exchange2 = getattr(ccxt, exchange2)
-    #exch2_inst = exchange2()
-    #exch2_inst.load_markets()
 
 
 

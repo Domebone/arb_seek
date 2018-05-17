@@ -191,13 +191,7 @@ for b in currBidDic:
         arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
 
         VolumeOptimize(min_ask_exch, max_bid_exch, b)
-        '''while tryAgain:
-            try:
-                
-                tryAgain=False
-            except KeyError:
-                print("Reattempting to fetch currency values in dollars from coinmarketcap.")
-                sleep(2)'''
+
         checker(min_ask_exch,b)
         checker(max_bid_exch,b)
 
