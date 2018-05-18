@@ -43,8 +43,7 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
     else:
         length=bid_length
 
-
-
+    ask_dollar = bid_dollar = 0
 
     try:
         for i in range(0,length):
@@ -53,7 +52,6 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
             price_comp=bid_order_book[i][0]/ask_order_book[i][0]
 
 
-            ask_dollar=bid_dollar=0 #initializing the variables outside of if statement
 
             if price_comp>1.025:
                 continue
@@ -63,9 +61,9 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
             else:
                 ask_dollar = dollar_price * ask_sum
                 bid_dollar = dollar_price * bid_sum
-                if min(ask_dollar,bid_dollar) >99:
+                #if min(ask_dollar,bid_dollar) >99:
 
-                    print ("Max amount recommended to retain profitability: " , min (ask_dollar, bid_dollar))
+                #    print ("Max amount recommended to retain profitability: " , min (ask_dollar, bid_dollar))
                 break
 
 
@@ -76,7 +74,6 @@ def VolumeOptimize(exchange1,exchange2, symbol):  # go back to fetch order book 
         print("Less than ", i , "orders. Investigate manually.")
 
 
-
-
+    return min(ask_dollar,bid_dollar)
 
 

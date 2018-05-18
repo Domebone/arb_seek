@@ -119,7 +119,7 @@ loop= asyncio.get_event_loop()
 
 loop.run_until_complete(loadInfo(exchanges))
 
-#print(symbols)
+
 
 loop.close()
 
@@ -128,7 +128,7 @@ currList=[]
 currBidDic={}
 currAskDic={}
 
-#creating list of unique currencies
+#creating list of unique currency names
 for obj in objectList:
     currList.append(obj.name)
 currList= list(set(currList)) #set method will remove any duplicate currency pairs
@@ -137,20 +137,22 @@ currList= list(set(currList)) #set method will remove any duplicate currency pai
 for c in currList:
     currBidDic[c] = {}
     for o in objectList:
-        if o.name == c:
+        if o.name == c:         #so we go through our objectList, check for objects which have same name as our string and then get their bid price
             currBidDic[c][o.exchange]= o.bid
 #filling our dic of currencies to exchange bids
 for c in currList:
     currAskDic[c] = {}
-    for o in objectList:
+    for o in objectList:        #same as our bidList
         if o.name == c:
             currAskDic[c][o.exchange]= o.ask
+
+# in the end, for each currency we have a dict of tuples where we have exchange: bid or exchange:ask
 
 x= len(currAskDic)
 to_be_deleted=[]
 for b in iter(currBidDic):
-    if len(currBidDic[b]) <=1 :to_be_deleted.append(b)
-for t in to_be_deleted:
+    if len(currBidDic[b]) <=1 :to_be_deleted.append(b)          #we get rid of dict elements that only have one exchange
+for t in to_be_deleted:                                         #this is to make sure we only look at coins that are on multiple exchanges
     del currBidDic[t]
     del currAskDic[t]
 
@@ -163,46 +165,47 @@ for b in currBidDic:
     prof_calc=0
 
     #get max bid
-    max_bid = max(currBidDic[b].items())
-    max_bid=max_bid[1]
+    max_bid = max(currBidDic[b].items())    #this returns a tuple with the max and the exchange name
+    max_bid=max_bid[1]                      #we use max_bid[1] to grab only the number value
 
     #get min
-    min_ask= min(currAskDic[b].items())
+    min_ask= min(currAskDic[b].items())     #same for asks but we take the min because we want the lowest asking price
     min_ask=min_ask[1]
     if (min_ask is not None) and (max_bid is not None): #had some problems where min_ask or max_bid would be None
-        if (min_ask > 0):
-            prof_calc=max_bid/min_ask
+        if (min_ask > 0):                               #sometimes min_ask would be very low as well
+            prof_calc=max_bid/min_ask                   #this is our actual arbitrage
     min_bid_exch=""
     max_ask_exch=""
 
-    for key,value in currBidDic[b].items():
-        if value==max_bid:
+    for key,value in currBidDic[b].items():             #we search for our exchange based on the value
+        if value==max_bid:                              #i think we could in theory use max_bid[0] or min_ask[0]
             max_bid_exch=key
 
     for key, value in currAskDic[b].items():
         if value == min_ask:
             min_ask_exch = key
-    #only taking arb ops of 1.1 or higher but lower than 1.75 to exclude anomalies from blocked wallets
-    #also want to exlcude token conversions
-    tryAgain=True
-    if 1.04 < prof_calc < 1.2:
-
-        print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
-        arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
-
-        VolumeOptimize(min_ask_exch, max_bid_exch, b)
-
-        checker(min_ask_exch,b)
-        checker(max_bid_exch,b)
+    #only taking arb ops of 1.04 -1.2 to exclude anomalies from blocked wallets and mismatched names
 
 
-#print(arbDic,len(arbDic))
+    vol=0
 
-#print(currList)
-#print (currBidDic)
-#print (currAskDic)
-#print (x)
-#print (len(currAskDic))
+    if (1.04 < prof_calc < 1.2):
+        #print("prof calc OK")
+        vol = VolumeOptimize(min_ask_exch, max_bid_exch, b)  # this checks what the optimal volume we should use is
+
+        if vol>500:
+
+
+            print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
+            print("This is profitable for "+ str(round(vol,2))+"$ and under")
+            checker(max_bid_exch, b)
+            checker(min_ask_exch, b)
+            #arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
+
+
+
+
+
 
 runTime=time.time()-startTime
 print(runTime)

@@ -7,7 +7,7 @@ def coinmarketcapPriceFetch(symbol):
 
     idx = symbol.find('/')
     subs = symbol[idx+1:]
-
+    price=0
     id=""
 
     ListingsURL="https://api.coinmarketcap.com/v2/listings/"
@@ -25,9 +25,12 @@ def coinmarketcapPriceFetch(symbol):
     TickerURL+=str(id)
 
     request=requests.get(TickerURL)
-    data=request.json()['data']['quotes']['USD']    #sometimes throws a quotes exception
+    try:
+        data=request.json()['data']['quotes']['USD']
+        price = data['price']                           #sometimes throws a quotes exception
+    except KeyError:
+        pass
 
-    price=data['price']
 
     return price
 
