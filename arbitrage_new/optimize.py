@@ -18,7 +18,7 @@ inc_List = ["binance", "ethfinex", "kucoin", "livecoin", "ccex", "coingi", "bitl
 exchange = {}
 symbols = []
 
-
+#live laught love
 async def get_exchanges(exch):
     for name in ccxt.exchanges:
         if name in inc_List:
