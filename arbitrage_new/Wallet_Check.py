@@ -21,6 +21,8 @@ def checker(exchange, symbol):
     out1=True
     out2=True
 
+  
+
 
     if (exchange_name =="coinexchange"):
 

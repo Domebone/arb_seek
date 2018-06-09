@@ -32,11 +32,13 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex",
+    '''inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex",
     "coinfloor","bl3p","btcmarkets","btcx",
               "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]'''
+    inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex",
+    "coinfloor","bl3p","btcmarkets","btcx","cryptopia"]
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -55,7 +57,7 @@ exchanges= getExchanges(exchanges)
 
 
 async def loadInfo(exch):
-    #loop though everyonbe of our exchanges
+    #loop though everyone of our exchanges
     for key in exch:
         print("Loading info from-> " +key+"\n...")
         #loading all the markets
@@ -139,16 +141,17 @@ for c in currList:
     for o in objectList:
         if o.name == c:         #so we go through our objectList, check for objects which have same name as our string and then get their bid price
             currBidDic[c][o.exchange]= o.bid
-#filling our dic of currencies to exchange bids
+#filling our dic of currencies to exchange asks
 for c in currList:
     currAskDic[c] = {}
     for o in objectList:        #same as our bidList
         if o.name == c:
             currAskDic[c][o.exchange]= o.ask
 
+
 # in the end, for each currency we have a dict of tuples where we have exchange: bid or exchange:ask
 
-x= len(currAskDic)
+
 to_be_deleted=[]
 for b in iter(currBidDic):
     if len(currBidDic[b]) <=1 :to_be_deleted.append(b)          #we get rid of dict elements that only have one exchange
@@ -171,6 +174,7 @@ for b in currBidDic:
     #get min
     min_ask= min(currAskDic[b].items())     #same for asks but we take the min because we want the lowest asking price
     min_ask=min_ask[1]
+
     if (min_ask is not None) and (max_bid is not None): #had some problems where min_ask or max_bid would be None
         if (min_ask > 0):                               #sometimes min_ask would be very low as well
             prof_calc=max_bid/min_ask                   #this is our actual arbitrage
@@ -184,23 +188,61 @@ for b in currBidDic:
     for key, value in currAskDic[b].items():
         if value == min_ask:
             min_ask_exch = key
-    #only taking arb ops of 1.04 -1.2 to exclude anomalies from blocked wallets and mismatched names
 
+
+
+
+
+
+
+    # finding a return loop
+    reverse_dict_ask = {}
+    reverse_dict_bid = {}
+    buying_exch = min_ask_exch
+    selling_exch = max_bid_exch
 
     vol=0
-
+    # only taking arb ops of 1.04 -1.2 to exclude anomalies from blocked wallets and mismatched names
     if (1.04 < prof_calc < 1.2):
         #print("prof calc OK")
         vol = VolumeOptimize(min_ask_exch, max_bid_exch, b)  # this checks what the optimal volume we should use is
 
+        for o in objectList:
+
+            if o.exchange == buying_exch:       #example: if you do MEME/BTC, to return, you only want BTC pairs and not LTC
+                reverse_dict_bid[o.name]=o.bid  # each dict element will be equal to currency name : bid price (reverse of ask)
+
+        for o in objectList:
+
+            if o.exchange == selling_exch:
+                idx = o.name.find('/')  # you only want to trade against the same base currency
+                base1 = o.name[idx + 1:]
+                idx = b.find('/')  # now we check our actual coin
+                base2 = b[idx + 1:]
+                if base1==base2:
+                    reverse_dict_ask[o.name] = o.ask
+
+
+
+
         if vol>500:
+
 
 
             print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
             print("This is profitable for "+ str(round(vol,2))+"$ and under")
             checker(max_bid_exch, b)
             checker(min_ask_exch, b)
-            #arbDic[b]={"profit":prof_calc, min_ask_exch:min_ask, max_bid_exch:max_bid}
+
+            for r in reverse_dict_bid:
+                for x in reverse_dict_ask:
+
+                    if r ==x:
+                        ratio=reverse_dict_ask[x] / reverse_dict_bid[r]
+                        if 1.01>ratio >.99:
+
+                            print("To return, buy ", r, "on: ", selling_exch, "for ", reverse_dict_bid[r],"and sell on: ", buying_exch, "for", reverse_dict_ask[x])
+                            print (ratio)
 
 
 
