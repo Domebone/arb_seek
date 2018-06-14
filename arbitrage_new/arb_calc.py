@@ -1,6 +1,6 @@
 import json
 import requests
-import smtplib
+
 import ccxt.async as ccxt
 import asyncio
 import time
@@ -11,7 +11,7 @@ from ccxt.base.errors import RequestTimeout
 from OrderBook_Calc import VolumeOptimize
 from Wallet_Check import checker
 
-
+sys.stdout=open("report.txt","w")
 startTime=time.time()
 
 class CurrencyPair:									# Each unique Currency PAIR from each unique exchange will become an object
@@ -114,7 +114,7 @@ async def loadInfo(exch):
 
 
 
-print(exchanges)
+
 #set up asyncio
 loop= asyncio.get_event_loop()
 
@@ -247,17 +247,10 @@ for b in currBidDic:
                             print (ratio)
 
 
-sys.stdout = open("~/Desktop/report.txt", "w")
 
 
-"""""""""
-content= 'egg'
-mail =smtlib.SMTP('smtp.gmail.com',587)
-mail.ehlo()
-mail.starttls()
-mail.login('arbitrageterry@gmail.com','m4r14n0p0l15')
-mail.sendmail("arbitrageterry@gmail.com","arbitrageterry@gmail.com",content)
-"""""
+
+
 
 runTime=time.time()-startTime
 print(runTime)
