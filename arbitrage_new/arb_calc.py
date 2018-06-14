@@ -1,8 +1,10 @@
 import json
 import requests
+import smtplib
 import ccxt.async as ccxt
 import asyncio
 import time
+import sys
 from ccxt.base.errors import NotSupported
 from ccxt.base.errors import DDoSProtection
 from ccxt.base.errors import RequestTimeout
@@ -33,10 +35,10 @@ def getExchanges(exch):
                   ,"bitthumb"]
     #list of things we actually want to include
     inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex",
-    "coinfloor","bl3p","btcmarkets","btcx",
-              "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
+    "coinfloor","bl3p","btcmarkets","btcx"]
+    '''  "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]
+              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]'''
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -226,26 +228,37 @@ for b in currBidDic:
         if vol>500:
 
 
-
-            print("Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid)
-            print("This is profitable for "+ str(round(vol,2))+"$ and under")
+            opp= "Arbitrage opportunity of ", prof_calc,"for: ", b,"buy at: ",min_ask_exch ,"at price: ",min_ask," sell on: ",max_bid_exch, "for: ",max_bid
+            vol_test="This is profitable for "+ str(round(vol,2))+"$ and under"
+            print(opp)
+            print(vol_test)
             checker(max_bid_exch, b)
             checker(min_ask_exch, b)
-
+            print("Return options: ")
             for r in reverse_dict_bid:
                 for x in reverse_dict_ask:
 
-                    if r ==x:
+                    if r ==x and (reverse_dict_ask[x] is not None) and  (reverse_dict_bid[r] is not None) :
                         ratio=reverse_dict_ask[x] / reverse_dict_bid[r]
+
                         if 1.01>ratio >.99:
-                            print("Return options: ")
+
                             print("Buy ", r, "on: ", selling_exch, "for ", reverse_dict_bid[r],"and sell on: ", buying_exch, "for", reverse_dict_ask[x])
                             print (ratio)
 
 
+sys.stdout = open("~/Desktop/report.txt", "w")
 
 
-
+"""""""""
+content= 'egg'
+mail =smtlib.SMTP('smtp.gmail.com',587)
+mail.ehlo()
+mail.starttls()
+mail.login('arbitrageterry@gmail.com','m4r14n0p0l15')
+mail.sendmail("arbitrageterry@gmail.com","arbitrageterry@gmail.com",content)
+"""""
 
 runTime=time.time()-startTime
 print(runTime)
+

@@ -80,6 +80,7 @@ def checker(exchange, symbol):
         print(exchange_name +" wallet online.")
     else:
         print(exchange_name+" wallet offline.")
+    
 
 
 
