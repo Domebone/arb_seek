@@ -74,15 +74,15 @@ def checker(exchange, symbol):
 
 
     if exchange_name in no_wallet_status:
-        print("No wallet data for " + exchange_name + " Check Manually.")
+        statement= "No Data"
 
     elif out:
-        print(exchange_name +" wallet online.")
+        statement= "Wallet Online"
     else:
-        print(exchange_name+" wallet offline.")
+        statement="Wallet Offline"
     
 
-
+    return statement
 
 
 

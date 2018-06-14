@@ -10,9 +10,16 @@ from ccxt.base.errors import DDoSProtection
 from ccxt.base.errors import RequestTimeout
 from OrderBook_Calc import VolumeOptimize
 from Wallet_Check import checker
+from datetime import datetime
 
-sys.stdout=open("report.txt","w")
 startTime=time.time()
+
+import csv
+with open('report.csv', 'w', newline='') as f:
+    writer = csv.writer(f)             #writer object the writes new rows
+
+    writer.writerow(['Currency','Exchange to Buy From',"Wallet Status",'Exchange to Sell On',"Wallet Status", 'Profit', 'Volume Limit (USD)'])
+
 
 class CurrencyPair:									# Each unique Currency PAIR from each unique exchange will become an object
 
@@ -34,11 +41,12 @@ def getExchanges(exch):
                   'okcoinusd', 'okcoincny', 'wex', 'virwox', 'xbtce', 'vbtc', 'yunbi',"bibox", "bit2c","bitbank","bitbay"
                   ,"bitthumb"]
     #list of things we actually want to include
-    inc_List=["binance","ethfinex","kucoin","livecoin","ccex","coingi","bitlish","bitstamp","bittrex",
-    "coinfloor","bl3p","btcmarkets","btcx"]
-    '''  "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
+    inc_List=["binance","ethfinex","kucoin","ccex","coingi","bitlish","bitstamp","bittrex","livecoin",
+    "coinfloor","bl3p","btcmarkets","btcx", "cex","coinexchange","coinmate","dsx","gemini","hitbtc","hitbtc2",
               "kraken","quadrigacx","southxchange","tidex","therock","wex","mixcoins","liqui", "bitz",
-              "cobinhood","gateio","gatecoin","hadax","huobipro","lakebtc","cryptopia"]'''
+              "cobinhood","gateio","gatecoin","hadax","huobipro","cryptopia"]
+    '''lakebtc'''
+
 
     #reading all exchanges
     for id in ccxt.exchanges:
@@ -232,8 +240,8 @@ for b in currBidDic:
             vol_test="This is profitable for "+ str(round(vol,2))+"$ and under"
             print(opp)
             print(vol_test)
-            checker(max_bid_exch, b)
-            checker(min_ask_exch, b)
+            wallet1 =checker(max_bid_exch, b)
+            wallet2=checker(min_ask_exch, b)
             print("Return options: ")
             for r in reverse_dict_bid:
                 for x in reverse_dict_ask:
@@ -246,6 +254,14 @@ for b in currBidDic:
                             print("Buy ", r, "on: ", selling_exch, "for ", reverse_dict_bid[r],"and sell on: ", buying_exch, "for", reverse_dict_ask[x])
                             print (ratio)
 
+            if not (wallet1=="Wallet Offline" or wallet2=="Wallet Offline"):
+                with open('report.csv', 'a', newline='') as f:
+                    writer = csv.writer(f)
+                    writer.writerow([str(b), min_ask_exch, wallet1, max_bid_exch, wallet2, prof_calc, vol])
+
+                with open('master.csv', 'a',newline='') as m:
+                    master_writer =csv.writer(m)
+                    master_writer.writerow([datetime.now(),str(b), min_ask_exch, max_bid_exch, prof_calc, vol])
 
 
 
