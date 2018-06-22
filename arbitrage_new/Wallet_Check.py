@@ -74,7 +74,7 @@ def checker(exchange, symbol):
 
 
     if exchange_name in no_wallet_status:
-        statement= "No Data"
+        statement= "No Wallet Data"
 
     elif out:
         statement= "Wallet Online"
