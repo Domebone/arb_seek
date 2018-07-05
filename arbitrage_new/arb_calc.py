@@ -267,11 +267,7 @@ for b in currBidDic:
                     report_writer = csv.writer(f, delimiter='\t')
                     report_writer.writerow([datetime.now(),str(b), min_ask_exch,wallet1, max_bid_exch,wallet2, prof_calc, vol])
                     f.close()
-                with open('master.csv', 'a',newline='') as m:
-                    print("adding to master")
-                    master_writer =csv.writer(m, delimiter='\t')
-                    master_writer.writerow([datetime.now(),str(b), min_ask_exch, wallet1, max_bid_exch,wallet2, prof_calc, vol])
-                    m.close()
+
 
 
 

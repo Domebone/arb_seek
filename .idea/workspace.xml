@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c97c63b3-e70e-4610-b4ba-5770ed7f2d4d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/arb_seek.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/arb_seek.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/arbitrage_new/coordinator.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arbitrage_new/Wallet_Check.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/Wallet_Check.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arbitrage_new/arb_calc.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/arb_calc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arbitrage_new/csv_compare.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/csv_compare.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arbitrage_new/send_email.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/send_email.py" afterDir="false" />
@@ -19,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="arb_calc.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="arb_calc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/arb_calc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="259" column="16" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
+            <state relative-caret-position="1710">
+              <caret line="267" column="59" lean-forward="true" selection-start-line="267" selection-start-column="59" selection-end-line="267" selection-end-column="59" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -31,11 +29,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="csv_compare.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="csv_compare.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/csv_compare.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+            <state relative-caret-position="306">
+              <caret line="35" column="93" selection-start-line="35" selection-start-column="93" selection-end-line="35" selection-end-column="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coordinator.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/arbitrage_new/coordinator.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="70" selection-start-line="2" selection-start-column="70" selection-end-line="2" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -43,7 +50,7 @@
       <file leaf-file-name="Wallet_Check.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/Wallet_Check.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
+            <state relative-caret-position="351">
               <caret line="75" column="41" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="41" />
             </state>
           </provider>
@@ -52,8 +59,8 @@
       <file leaf-file-name="send_email.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/send_email.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+            <state relative-caret-position="150">
+              <caret line="10" column="76" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -64,22 +71,10 @@
       <file leaf-file-name="OrderBook_Calc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/OrderBook_Calc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
+            <state relative-caret-position="546">
               <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sub.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/arbitrage_new/sub.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" column="25" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,8 +108,9 @@
         <option value="$PROJECT_DIR$/arbitrage_new/journey planner.py" />
         <option value="$PROJECT_DIR$/arbitrage_new/Wallet_Check.py" />
         <option value="$PROJECT_DIR$/arbitrage_new/send_email.py" />
-        <option value="$PROJECT_DIR$/arbitrage_new/csv_compare.py" />
         <option value="$PROJECT_DIR$/arbitrage_new/arb_calc.py" />
+        <option value="$PROJECT_DIR$/arbitrage_new/coordinator.sh" />
+        <option value="$PROJECT_DIR$/arbitrage_new/csv_compare.py" />
       </list>
     </option>
   </component>
@@ -158,6 +154,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -177,7 +174,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.arb_calc">
+  <component name="RunManager" selected="Bash.coordinator.sh">
+    <configuration name="coordinator.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <module name="arb_seek" />
+      <option name="INTERPRETER_OPTIONS" value="bash" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/arbitrage_new" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/arbitrage_new/coordinator.sh" />
+      <option name="PARAMETERS" value="" />
+    </configuration>
     <configuration name="arb_calc" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="arb_seek" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -255,9 +261,11 @@
       <item itemvalue="Python.arb_calc" />
       <item itemvalue="Python.send_email" />
       <item itemvalue="Python.csv_compare" />
+      <item itemvalue="Bash.coordinator.sh" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Bash.coordinator.sh" />
         <item itemvalue="Python.arb_calc" />
         <item itemvalue="Python.csv_compare" />
         <item itemvalue="Python.send_email" />
@@ -479,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528998133906</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="csv comparison, emailing added">
+      <created>1529698980236</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1529698980236</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -488,41 +503,22 @@
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13625866" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3296355" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30903327" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.24564184" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.24564184" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-    </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13625866" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30903327" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.24646227" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
-    </layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3296355" />
+    </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -563,23 +559,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="csv comparison, emailing added" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/arbitrage_new/Wallet_Check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="75" column="41" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/arbitrage_new/send_email.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/OrderBook_Calc.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -924,20 +903,26 @@
     <entry file="file://$USER_HOME$/venv/lib/python3.6/site-packages/ccxt/async/liqui.py" />
     <entry file="file://$PROJECT_DIR$/arbitrage_new/coinmarketcap.py" />
     <entry file="file://$PROJECT_DIR$/arbitrage_new/return.py" />
+    <entry file="file://$PROJECT_DIR$/arbitrage_new/journey planner.py" />
+    <entry file="file://$PROJECT_DIR$/arbitrage_new/master.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arbitrage_new/report.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/sub.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="25" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="25" />
+        <state relative-caret-position="135">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/arbitrage_new/journey planner.py" />
     <entry file="file://$PROJECT_DIR$/arbitrage_new/OrderBook_Calc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
+        <state relative-caret-position="546">
           <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
@@ -947,38 +932,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/Wallet_Check.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
+        <state relative-caret-position="351">
           <caret line="75" column="41" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/send_email.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+        <state relative-caret-position="150">
+          <caret line="10" column="76" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/arbitrage_new/csv_compare.py">
+    <entry file="file://$PROJECT_DIR$/arbitrage_new/coordinator.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        <state relative-caret-position="30">
+          <caret line="2" column="70" selection-start-line="2" selection-start-column="70" selection-end-line="2" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/arbitrage_new/master.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/arb_calc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="259" column="16" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
+        <state relative-caret-position="1710">
+          <caret line="267" column="59" lean-forward="true" selection-start-line="267" selection-start-column="59" selection-end-line="267" selection-end-column="59" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arbitrage_new/csv_compare.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="35" column="93" selection-start-line="35" selection-start-column="93" selection-end-line="35" selection-end-column="93" />
         </state>
       </provider>
     </entry>

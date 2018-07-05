@@ -8,7 +8,7 @@ from datetime import datetime
 import os
 filename="final_report.csv"
 f=open(filename,"rb")
-if os.path.getsize(filename) > 0:   #checks if file is created and if any arb opps exist
+if os.path.getsize(filename) > 0:   #checks if file is created and not empty
 
     msg=MIMEMultipart()
 
