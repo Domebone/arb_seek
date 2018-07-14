@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c97c63b3-e70e-4610-b4ba-5770ed7f2d4d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/arbitrage_new/coordinator.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arbitrage_new/arb_calc.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/arb_calc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arbitrage_new/csv_compare.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/csv_compare.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arbitrage_new/send_email.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/send_email.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arbitrage_new/final_report.csv" beforeDir="false" afterPath="$PROJECT_DIR$/arbitrage_new/final_report.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +18,8 @@
       <file leaf-file-name="arb_calc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/arb_calc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="267" column="59" lean-forward="true" selection-start-line="267" selection-start-column="59" selection-end-line="267" selection-end-column="59" />
+            <state relative-caret-position="3810">
+              <caret line="267" column="59" selection-start-line="267" selection-start-column="59" selection-end-line="267" selection-end-column="59" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -32,8 +30,8 @@
       <file leaf-file-name="csv_compare.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/csv_compare.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="35" column="93" selection-start-line="35" selection-start-column="93" selection-end-line="35" selection-end-column="93" />
+            <state relative-caret-position="157">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -50,7 +48,7 @@
       <file leaf-file-name="Wallet_Check.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/Wallet_Check.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
+            <state relative-caret-position="1125">
               <caret line="75" column="41" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="41" />
             </state>
           </provider>
@@ -59,7 +57,7 @@
       <file leaf-file-name="send_email.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/send_email.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
+            <state relative-caret-position="45">
               <caret line="10" column="76" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -71,7 +69,7 @@
       <file leaf-file-name="OrderBook_Calc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arbitrage_new/OrderBook_Calc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
+            <state relative-caret-position="660">
               <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
@@ -141,12 +139,6 @@
               <item name="arb_new" type="462c0819:PsiDirectoryNode" />
               <item name="arbitrage_new" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="arb_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="arb_new" type="462c0819:PsiDirectoryNode" />
-              <item name="arbitrage_new" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -154,7 +146,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -174,7 +166,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Bash.coordinator.sh">
+  <component name="RunManager" selected="Python.csv_compare">
     <configuration name="coordinator.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="arb_seek" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -265,9 +257,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.csv_compare" />
         <item itemvalue="Bash.coordinator.sh" />
         <item itemvalue="Python.arb_calc" />
-        <item itemvalue="Python.csv_compare" />
         <item itemvalue="Python.send_email" />
         <item itemvalue="Python.coinmarketcap" />
       </list>
@@ -494,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529698980236</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="csv comparison, emailing finalization">
+      <created>1530798206102</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1530798206102</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -509,7 +508,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39936608" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -556,26 +555,14 @@
     <MESSAGE value="deleting useless currencies" />
     <MESSAGE value="return loop added" />
     <MESSAGE value="csv comparison, emailing added" />
-    <option name="LAST_COMMIT_MESSAGE" value="csv comparison, emailing added" />
+    <MESSAGE value="csv comparison, emailing finalization" />
+    <option name="LAST_COMMIT_MESSAGE" value="csv comparison, emailing finalization" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/arbitrage_new/OrderBook_Calc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/sub.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="8" column="25" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -627,9 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="8" column="25" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -664,9 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="8" column="25" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -694,9 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="8" column="25" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -731,9 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="14" selection-start-column="14" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -914,15 +889,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/OrderBook_Calc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
+        <state relative-caret-position="660">
           <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
@@ -932,14 +904,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/Wallet_Check.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
+        <state relative-caret-position="1125">
           <caret line="75" column="41" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/send_email.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
+        <state relative-caret-position="45">
           <caret line="10" column="76" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
@@ -956,18 +928,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/arb_calc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="267" column="59" lean-forward="true" selection-start-line="267" selection-start-column="59" selection-end-line="267" selection-end-column="59" />
+        <state relative-caret-position="3810">
+          <caret line="267" column="59" selection-start-line="267" selection-start-column="59" selection-end-line="267" selection-end-column="59" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/arbitrage_new/csv_compare.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="35" column="93" selection-start-line="35" selection-start-column="93" selection-end-line="35" selection-end-column="93" />
+        <state relative-caret-position="157">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
