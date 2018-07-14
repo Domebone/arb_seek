@@ -11,15 +11,15 @@ with open("master.csv", "r", newline='') as m:
             writer=csv.writer(f,delimiter='\t')
             next(master_reader)
             next(report_reader)  # skipping the first rows that have the column headings
-            for report_row in report_reader:
+            for row_report in report_reader:
 
                 for row in master_reader:
 
-                    if row_report[1] in row_master and row_report[2] in row_master and row_report[4] in row_master:
+                    if row_report[1] in row and row_report[2] in row and row_report[4] in row:
                         match_counter += 1
 
                 if match_counter < 1:
-                    writer.writerow(report_row)
+                    writer.writerow(row_report)
                 match_counter = 0
 
                 m.seek(0)  # brings us back to the start of the master.csv
